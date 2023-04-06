@@ -3,7 +3,7 @@
 /**********************************/
 body {
     color: #353535;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Mitr';
     font-weight: 400;
     background: #f3f6ff;
 }
@@ -22,7 +22,7 @@ a:focus {
 
 
 h2 {
-    font-family: 'Source Code Pro', monospace;
+    font-family: 'Mitr';
     font-weight: 700;
 }
 
