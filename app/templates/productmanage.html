@@ -9,18 +9,19 @@
     <meta content="eCommerce HTML Template Free Download" name="description">
 
     <!-- Favicon -->
-    <link href="img/favicon.ico" rel="icon">
+    <!-- <link href="/static/assets/img/favicon.ico" rel="icon"> -->
 
     <!-- Google Fonts -->
     <link href='https://fonts.googleapis.com/css?family=Mitr' rel='stylesheet'>
     <!-- CSS Libraries -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-    <link href="lib/slick/slick.css" rel="stylesheet">
-    <link href="lib/slick/slick-theme.css" rel="stylesheet">
+    <!-- <link href="/static/assets/lib/slick/slick.css" rel="stylesheet"> -->
+    <!-- <link href="/static/assets/lib/slick/slick-theme.css" rel="stylesheet"> -->
+    <link href="/static/assets/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
 
     <!-- Template Stylesheet -->
-    <link href="/static/assets/css/style.css" rel="stylesheet">
 </head>
 
 <body>
@@ -101,18 +102,23 @@
                         <div class="addproduct"><!-- Bottom Bar Start -->
                             <div class="bottom-bar">
                                 <div class="container-fluid">
-                                    <div class="row align-items-center justify-content-between">
-                                        <div class="col-md-3">
+                                    <div class="row align-items-right">
+                                        <div class="col-md-2">
                                             <button class="btn btn-success" data-toggle="modal"
                                                 data-target="#addproduct"><i
                                                     class="fas fa-plus-circle mr-2"></i>เพิ่มสินค้า</button>
                                         </div>
-                                        <div class="col-md-5">
+                                        <div class="col-md-2">
+                                            <button class="btn btn-success" data-toggle="modal"
+                                                data-target="#addCategory"><i
+                                                    class="fas fa-plus-circle mr-2"></i>เพิ่มประเภทสินค้า</button>
+                                        </div>
+                                        <!-- <div class="col-md-5">
                                             <div class="search">
                                                 <input type="text" placeholder="Search">
                                                 <button><i class="fa fa-search"></i></button>
                                             </div>
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </div>
                             </div>
@@ -128,21 +134,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td class="text-center">1</td>
-                                    <td class="text-center">Ex123456
-                                    </td>
-                                    <td class="text-center">Ex123456</td>
-                                    <td class="text-center">200</td>
-                                    <td class="text-center">
-                                        <a href="#" class="settings text-warning"
-                                            onclick="" title="Settings">
-                                            <i class="fas fa-cog mr-2"></i></a>
-                                        <a href="#" class="delete text-danger"
-                                            onclick="" title="Delete">
-                                            <i class="fas fa-trash-alt mr-2"></i></a>
-                                    </td>
-                                </tr>
+                                
                             </tbody>
                         </table>
                     </div>
@@ -152,7 +144,179 @@
     </div>
     <!-- productmanage End -->
 
+    <!--Start Modal Add Category -->
+    <div class="modal fade" id="addCategory" tabindex="-1" role="dialog" aria-labelledby="addCategoryTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addCategoryTitle">เพิ่มประเภทสินค้า</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Edit Category Start -->
+                    <div class="container-fluid mt-2">
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="col">
+                                            <span class="ml-1">ชื่อประเภทสินค้า</span>
+                                            <input type="text" id="CategoryName" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Edit Category End -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
+                    <button type="button" onclick="createCategory()" class="btn btn-primary">บันทึก</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--End Modal Add Category -->
 
+    <!--Start Modal Add Product -->
+    <div class="modal fade" id="addproduct" tabindex="-1" role="dialog" aria-labelledby="addproductTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addproductTitle">เพิ่มข้อมูลสินค้า</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Edit Product Start -->
+                    <div class="container-fluid mt-2">
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <span class="ml-1">ประเภทสินค้า</span>
+                                            <select class="form-control" id="category">
+                                                <option selected>เลือกประเภท</option>
+                                                <!-- {% for cate in categoryLs %}
+                                                <option value="{{cate.categoryId}}">{{cate.categoryName}}</option>
+                                                {% endfor %} -->
+                                            </select>
+                                        </div>
+                                        <div class="col-4">
+                                            <span class="ml-1">ชื่อสินค้า</span>
+                                            <input type="text" id="productName" class="form-control">
+                                        </div>
+                                        <div class="col-4">
+                                            <span class="ml-1">ราคาสินค้า</span>
+                                            <input type="text" id="productPrice" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="tarea">
+                                        <label for="">ข้อมูลสินค้า</label>
+                                        <textarea class="form-control" id="productDetail" rows="3"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <input type="file" class="custom-file-input" id="productImage"
+                                        onchange="imageUploaded()">
+                                    <label class="custom-file-label" for="productImage">เลือกไฟล์</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Edit Product End -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
+                    <button type="button" onclick="createProduct()" class="btn btn-primary">บันทึก</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--End Modal Add Product -->
+
+    <!--Start Modal Edit Product -->
+    <div class="modal fade" id="editProductModal" tabindex="-1" role="dialog" aria-labelledby="editproductTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editproductTitle">แก้ไขข้อมูลสินค้า</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Edit Product Start -->
+                    <div class="container-fluid mt-2">
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <span class="ml-1">ประเภทสินค้า</span>
+                                            <select class="form-control" id="editCategory">
+                                                <option selected>เลือกประเภท</option>
+                                                <!-- {% for cate in categoryLs %}
+                                                <option value="{{cate.categoryId}}">{{cate.categoryName}}</option>
+                                                {% endfor %} -->
+                                            </select>
+                                        </div>
+                                        <div class="col-4">
+                                            <span class="ml-1">ชื่อสินค้า</span>
+                                            <input type="text" id="editProductName" class="form-control">
+                                        </div>
+                                        <div class="col-4">
+                                            <span class="ml-1">ราคาสินค้า</span>
+                                            <input type="text" id="editProductPrice" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="tarea">
+                                        <label for="">ข้อมูลสินค้า</label>
+                                        <textarea class="form-control" id="editProductDetail" rows="3"></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <div class="row">
+                                        <div class="form-group-img col-md-12 text-center ">
+                                            <!-- <img src="/static/assets/img/gallery/Pork.jpg" id="showProductImage"
+                                                class="rounded" alt=""> -->
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="editProductImage"
+                                            onchange="editImageUploaded()">
+                                        <label class="custom-file-label" style="width: 100%;"
+                                            for="editProductImage">เลือกไฟล์</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Edit Product End -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
+                    <button type="button" id="btnEditProduct" class="btn btn-primary">บันทึก</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--End Modal Edit Product -->
 
     <!-- Back to Top -->
     <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
@@ -160,11 +324,27 @@
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-    <script src="lib/easing/easing.min.js"></script>
-    <script src="lib/slick/slick.min.js"></script>
-
+    <!-- <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/slick/slick.min.js"></script> -->
+    <script type="text/javascript" charset="utf8"
+        src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Template Javascript -->
-    <script src="js/main.js"></script>
+    <!-- <script src="static/assets/js/main.js"></script> -->
+
+    <script>
+        $(document).ready(function () {
+            $('#tableProduct').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": true,
+                "ordering": true,
+                "info": false,
+                "autoWidth": false,
+                "responsive": true,
+            });
+        });
+    </script>
 </body>
 
 </html>
