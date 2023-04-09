@@ -9,26 +9,25 @@
     <meta content="eCommerce HTML Template Free Download" name="description">
 
     <!-- Favicon -->
-    <link href="img/favicon.ico" rel="icon">
+    <!-- <link href="/static/assets/img/favicon.ico" rel="icon"> -->
 
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Source+Code+Pro:700,900&display=swap"
-        rel="stylesheet">
-
+    <link href='https://fonts.googleapis.com/css?family=Mitr' rel='stylesheet'>
     <!-- CSS Libraries -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-    <link href="lib/slick/slick.css" rel="stylesheet">
-    <link href="lib/slick/slick-theme.css" rel="stylesheet">
+    <!-- <link href="/static/assets/lib/slick/slick.css" rel="stylesheet"> -->
+    <!-- <link href="/static/assets/lib/slick/slick-theme.css" rel="stylesheet"> -->
+    <link href="/static/assets/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
 
     <!-- Template Stylesheet -->
-    <link href="css/style.css" rel="stylesheet">
 </head>
 
 <body>
 
-      <!-- Nav Bar Start -->
-      <div class="nav">
+    <!-- Nav Bar Start -->
+    <div class="nav">
         <div class="container-fluid">
             <nav class="navbar navbar-expand-md bg-dark navbar-dark">
                 <a href="#" class="navbar-brand">MENU</a>
@@ -98,15 +97,18 @@
                     <div class="tab-content">
                         <div class="tab-pane fade show active" id="productmanage" role="tabpanel"
                             aria-labelledby="usermanage-nav">
-                            <div class="text-center"><h2>การจัดการสมาชิก</h2></div>
+                            <div class="text-center">
+                                <h2>การจัดการสมาชิก</h2>
+                            </div>
                         </div>
-                        <div class="addproduct"><!-- Bottom Bar Start -->                            
+                        <div class="addproduct"><!-- Bottom Bar Start -->
                             <div class="bottom-bar">
                                 <div class="container-fluid">
                                     <div class="row align-items-center justify-content-between">
                                         <div class="col-md-3">
-                                            <button class="btn btn-success" data-toggle="modal" data-target="#addproduct"><i
-                                                class="fas fa-plus-circle mr-2"></i>เพิ่มสมาชิก</button>
+                                            <button class="btn btn-success" data-toggle="modal"
+                                                data-target="#aduser1"><i
+                                                    class="fas fa-plus-circle mr-2"></i>เพิ่มสมาชิก</button>
                                         </div>
                                         <div class="col-md-5">
                                             <div class="search">
@@ -123,6 +125,7 @@
                                 <tr>
                                     <th class="text-center">ลำดับ</th>
                                     <th class="text-center">ชื่อ นามสกุล</th>
+                                    <th class="text-center">ที่อยู่</th>
                                     <th class="text-center">เบอร์ติดต่อ</th>
                                     <th class="text-center">จัดการสินค้า</th>
                                 </tr>
@@ -130,18 +133,15 @@
                             <tbody>
                                 <tr>
                                     <td class="text-center">1</td>
-                                    <td class="text-center">Chanu Hong
-                                    </td>
+                                    <td class="text-center">Chanu Hong</td>
+                                    <td class="text-center">40ซ.หลักเมือง</td>
                                     <td class="text-center">082-xxxxxxxx</td>
                                     <td class="text-center">
-                                        <a href="#" class="settings text-warning"
-                                            onclick="getProduct('{{prod.productId}}')" title="Settings"><i
-                                                class="fas fa-cog mr-2"></i></a>
-                                        <a href="#" class="delete text-danger"
-                                            onclick="delProduct('{{prod.productId}}')" title="Delete"><i
-                                                class="fas fa-trash-alt mr-2"></i></a>
+                                        <a href="#" class="settings text-warning"><i class="fas fa-cog mr-2" data-toggle="modal"
+                                            data-target="#Edituser"></i></a>
+                                        <a href="#" class="delete text-danger"><i class="fas fa-trash-alt mr-2"></i></a>
                                     </td>
-                                </tr> 
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -150,6 +150,184 @@
         </div>
     </div>
     <!-- My Account End -->
+
+     <!--Start Modal aduser -->
+     <div class="modal fade" id="Edituser" tabindex="-1" role="dialog" aria-labelledby="EdituserTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="EdituserTitle">แก้ไขข้อมูสมาชิก</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="addaccount">
+                    <!-- Edit Product Start -->
+                    <div class="container-fluid mt-2">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="row">
+                                    <div class="col-md-6 mb-2">
+                                        <label class="ml-2" for="custFirstName">ชื่อ</label>
+                                        <input class="form-control" type="text" placeholder="First Name"
+                                            id="custFirstName">
+                                    </div>
+                                    <div class="col-md-6 mb-2">
+                                        <label class="ml-2" for="custLastName">นามสกุล</label>
+                                        <input class="form-control" type="text" placeholder="Last Name"
+                                            id="custLastName">
+                                    </div>
+                                    <div class="col-md-12 mb-2">
+                                        <div class="row">
+
+                                            <div class="col-md-5"><label class="ml-2" for="custLastName">ที่อยู่</label>
+                                                <input class="form-control" type="text" placeholder="Address">
+                                            </div>
+                                            <div class="col-md-2">
+                                                <label class="ml-2" for="custLastName">หมู่</label>
+                                                <input class="form-control" type="text" placeholder="Moo">
+                                            </div>
+                                            <div class="col-md-5">
+                                                <label class="ml-2" for="custLastName">ถนน</label>
+                                                <input class="form-control" type="text" placeholder="Road">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 mb-2">
+                                        <div class="row">
+
+                                            <div class="col-md-3"><label class="ml-2" for="custLastName">ตำบล/แขวง</label>
+                                                <input class="form-control" type="text" placeholder="Subdistrict">
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label class="ml-2" for="custLastName">อำเภอ/เขต</label>
+                                                <input class="form-control" type="text" placeholder="District">
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label class="ml-2" for="custLastName">จังหวัด</label>
+                                                <input class="form-control" type="text" placeholder="Province">
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label class="ml-2" for="custLastName">รหัสไปรษณีย์</label>
+                                                <input class="form-control" type="text" placeholder="Post code">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="col-md-12 mt-2">
+                                        <textarea class="form-control" placeholder="Address" id="" rows="2"></textarea>
+                                    </div> -->
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-2">
+                                        <label class="ml-2" for="custTelNo">เบอร์โทรศัพท์</label>
+                                        <input class="form-control" type="text" placeholder="Mobile" id="custTelNo">
+                                    </div>
+                                    <div class="col-md-6 mb-4">
+                                        <label class="ml-2" for="custEmail">อีเมล</label>
+                                        <input class="form-control" type="text" placeholder="Email" id="custEmail">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- aduser End -->
+                <div class="modal-footer">
+                    <button type="button" class="col-md-2 btn btn-secondary" data-dismiss="modal">ปิด</button>
+                    <button type="button" class="col-md-2 btn btn-primary" id="btnEditCust">บันทึก</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--End aduser -->
+
+    <!--Start Modal aduser1 -->
+    <div class="modal fade" id="aduser1" tabindex="-1" role="dialog" aria-labelledby="aduser1Title" aria-hidden="true">
+        <div class="modal-dialog modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="aduser1Title">เพิ่มข้อมูสมาชิก</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="addaccount">
+                    <!-- Edit Product Start -->
+                    <div class="container-fluid mt-2">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="row">
+                                    <div class="col-md-6 mb-2">
+                                        <label class="ml-2" for="custFirstName">ชื่อ</label>
+                                        <input class="form-control" type="text" placeholder="First Name"
+                                            id="custFirstName">
+                                    </div>
+                                    <div class="col-md-6 mb-2">
+                                        <label class="ml-2" for="custLastName">นามสกุล</label>
+                                        <input class="form-control" type="text" placeholder="Last Name"
+                                            id="custLastName">
+                                    </div>
+                                    <div class="col-md-12 mb-2">
+                                        <div class="row">
+
+                                            <div class="col-md-5"><label class="ml-2" for="custLastName">ที่อยู่</label>
+                                                <input class="form-control" type="text" placeholder="Address">
+                                            </div>
+                                            <div class="col-md-2">
+                                                <label class="ml-2" for="custLastName">หมู่</label>
+                                                <input class="form-control" type="text" placeholder="Moo">
+                                            </div>
+                                            <div class="col-md-5">
+                                                <label class="ml-2" for="custLastName">ถนน</label>
+                                                <input class="form-control" type="text" placeholder="Road">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 mb-2">
+                                        <div class="row">
+
+                                            <div class="col-md-3"><label class="ml-2" for="custLastName">ตำบล/แขวง</label>
+                                                <input class="form-control" type="text" placeholder="Subdistrict">
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label class="ml-2" for="custLastName">อำเภอ/เขต</label>
+                                                <input class="form-control" type="text" placeholder="District">
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label class="ml-2" for="custLastName">จังหวัด</label>
+                                                <input class="form-control" type="text" placeholder="Province">
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label class="ml-2" for="custLastName">รหัสไปรษณีย์</label>
+                                                <input class="form-control" type="text" placeholder="Post code">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="col-md-12 mt-2">
+                                        <textarea class="form-control" placeholder="Address" id="" rows="2"></textarea>
+                                    </div> -->
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-2">
+                                        <label class="ml-2" for="custTelNo">เบอร์โทรศัพท์</label>
+                                        <input class="form-control" type="text" placeholder="Mobile" id="custTelNo">
+                                    </div>
+                                    <div class="col-md-6 mb-4">
+                                        <label class="ml-2" for="custEmail">อีเมล</label>
+                                        <input class="form-control" type="text" placeholder="Email" id="custEmail">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- aduser End -->
+                <div class="modal-footer">
+                    <button type="button" class="col-md-2 btn btn-secondary" data-dismiss="modal">ปิด</button>
+                    <button type="button" class="col-md-2 btn btn-primary" id="btnEditCust">บันทึก</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--End aduser1 -->
 
 
 

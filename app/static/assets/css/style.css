@@ -2,267 +2,395 @@
 /********** General CSS ***********/
 /**********************************/
 body {
-    color: #353535;
-    font-family: 'Mitr';
-    font-weight: 400;
-    background: #f3f6ff;
+  color: #353535;
+  font-family: "Mitr";
+  font-weight: 400;
+  background: #f3f6ff;
 }
 
 a {
-    color: #FF6F61;
+  color: #ff6f61;
 }
 
 a:hover,
 a:active,
 a:focus {
-    color: #353535;
-    outline: none;
-    text-decoration: none;
+  color: #353535;
+  outline: none;
+  text-decoration: none;
 }
-
 
 h2 {
-    font-family: 'Mitr';
-    font-weight: 700;
+  font-family: "Mitr";
+  font-weight: 700;
 }
 
-@media(min-width: 992px) {
-    .container-fluid {
-        padding-right: 60px;
-        padding-left: 60px;
-    }
+@media (min-width: 992px) {
+  .container-fluid {
+    padding-right: 60px;
+    padding-left: 60px;
+  }
 }
-
-
 
 /**********************************/
 /*********** Nav Bar CSS **********/
 /**********************************/
 .nav {
-    position: relative;
+  position: relative;
 }
 
 @media (min-width: 992px) {
-    .nav .container-fluid {
-        padding-left: 52px;
-        padding-right: 52px;
-    }
+  .nav .container-fluid {
+    padding-left: 52px;
+    padding-right: 52px;
+  }
 }
 
 .nav .navbar {
-    height: 100%;
-    padding: 0;
+  height: 100%;
+  padding: 0;
 }
 
 .nav .dropdown-menu {
-    margin-top: 0;
-    border: 0;
-    border-radius: 0;
-    background: #FF6F61;
+  margin-top: 0;
+  border: 0;
+  border-radius: 0;
+  background: #FF3300;
 }
 
 .nav .dropdown-menu a.active {
-    color: #353535;
-    background: #f8f9fa;
+  color: #353535;
+  background: #f8f9fa;
 }
 
 @media (min-width: 768px) {
-    .nav,
-    .nav .navbar {
-        background: #FF6F61 !important;
-    }
-    
-    .nav .navbar-brand {
-        display: none;
-    }
-    
-    .nav .navbar-dark a.nav-link {
-        color: #ffffff;
-        font-size: 14px;
-        text-transform: uppercase;
-    }
-    
-    .nav .navbar-dark a.nav-link:hover,
-    .nav .navbar-dark a.nav-link.active {
-        color: #000000;
-    }
+  .nav,
+  .nav .navbar {
+    background: #FF3300 !important;
+  }
+
+  .nav .navbar-brand {
+    display: none;
+  }
+
+  .nav .navbar-dark a.nav-link {
+    color: #ffffff;
+    font-size: 14px;
+    text-transform: uppercase;
+  }
+
+  .nav .navbar-dark a.nav-link:hover,
+  .nav .navbar-dark a.nav-link.active {
+    color: #000000;
+  }
 }
 
 @media (max-width: 768px) {
-    .nav {
-        padding: 5px 0;
-    }
-    
-    .nav,
-    .nav .navbar {
-        background: #000000 !important;
-    }
-    
-    .nav a.nav-link {
-        padding: 5px 0;
-    }
-    
-    .nav .dropdown-menu {
-        box-shadow: none;
-    }
-}
+  .nav {
+    padding: 5px 0;
+  }
 
+  .nav,
+  .nav .navbar {
+    background: #000000 !important;
+  }
+
+  .nav a.nav-link {
+    padding: 5px 0;
+  }
+
+  .nav .dropdown-menu {
+    box-shadow: none;
+  }
+}
 
 /**********************************/
 /********* Bottom Bar CSS *********/
 /**********************************/
 .bottom-bar {
-    padding: 15px 0;
-    background: #FFE4C4;
-    margin-bottom: 30px;
+  padding: 15px 0;
+  background: #ffe4c4;
+  margin-bottom: 30px;
 }
 
 .bottom-bar.search {
-    border-radius: 20px;
+  border-radius: 20px;
 }
 
-
-.bottom-bar .search ,.btn {
-    width: 100%;
+.bottom-bar .search,
+.btn {
+  width: 100%;
 }
 
-.bottom-bar .search input[type=text] {
-    width: 100%;
-    height: 40px;
-    padding: 0 15px;
-    color: #666666;
-    border: 1px solid #FF6F61;
-    border-radius: 4px;
+.bottom-bar .search input[type="text"] {
+  width: 100%;
+  height: 40px;
+  padding: 0 15px;
+  color: #666666;
+  border: 1px solid #ff6f61;
+  border-radius: 4px;
 }
 
 .bottom-bar .search button {
-    position: absolute;
-    width: 40px;
-    height: 38px;
-    top: 1px;
-    right: 16px;
-    padding: 0 15px;
-    border: none;
-    background: none;
-    color: #FF6F61;
-    border-radius: 15px;
+  position: absolute;
+  width: 40px;
+  height: 38px;
+  top: 1px;
+  right: 16px;
+  padding: 0 15px;
+  border: none;
+  background: none;
+  color: #ff6f61;
+  border-radius: 15px;
 }
 
 .bottom-bar .btn {
-    border: none;
-    background: #ffffff;
-    color: #FF6F61;
-    border-radius: 15px;
+  border: none;
+  background: #ffffff;
+  color: #ff6f61;
+  border-radius: 15px;
 }
 
 .bottom-bar .search button:hover {
-    background: #FF6F61;
-    color: #ffffff;
+  background: #ff6f61;
+  color: #ffffff;
 }
 
 .bottom-bar .user {
-    font-size: 0;
-    text-align: right;
+  font-size: 0;
+  text-align: right;
 }
 
 .bottom-bar .user .wishlist {
-    margin-right: 15px;
+  margin-right: 15px;
 }
 
 .bottom-bar .user .cart i,
 .bottom-bar .user .wishlist i {
-    color: #FF6F61;
+  color: #ff6f61;
 }
 
 .bottom-bar .user .cart span,
 .bottom-bar .user .wishlist span {
-    color: #FF6F61;
-    font-size: 15px;
+  color: #ff6f61;
+  font-size: 15px;
 }
 
 .bottom-bar .user .cart:hover i,
 .bottom-bar .user .wishlist:hover i,
 .bottom-bar .user .cart:hover span,
 .bottom-bar .user .wishlist:hover span {
-    color: #ffffff;
+  color: #ffffff;
 }
 
 @media (min-width: 768px) {
-    .bottom-bar {
-        max-height: 90px;
-    }
+  .bottom-bar {
+    max-height: 90px;
+  }
 }
 
 @media (max-width: 767.98px) {
-    .bottom-bar .logo,
-    .bottom-bar .search,
-    .bottom-bar .user {
-        text-align: center;
-        margin-bottom: 15px;
-    }
-    
-    .bottom-bar .user {
-        margin-bottom: 0;
-    }
-}
+  .bottom-bar .logo,
+  .bottom-bar .search,
+  .bottom-bar .user {
+    text-align: center;
+    margin-bottom: 15px;
+  }
 
+  .bottom-bar .user {
+    margin-bottom: 0;
+  }
+}
 
 /**********************************/
 /********* My Account CSS *********/
 /**********************************/
 .my-account {
-    position: relative;
-    padding: 30px 0;
+  position: relative;
+  padding: 30px 0;
 }
 
 .my-account .head-manage {
-    background: #FFE4C4;
+  background: #ffe4c4;
 }
 
 .my-account .nav.nav-pills .nav-link {
-    padding: 10px 15px;
-    color: #353535;
-    background: #FFE4C4;
-    border-radius: 0;
-    border-bottom: 1px solid #dddddd;
-    transition: all .3s;
+  padding: 10px 15px;
+  color: #353535;
+  background: #ffe4c4;
+  border-radius: 0;
+  border-bottom: 1px solid #dddddd;
+  transition: all 0.3s;
+}
+
+.my-account .nav.nav-pills .nav-link i {
+    color: #FF3300;
 }
 
 .my-account .nav.nav-pills .nav-link:last-child {
-    border-bottom: none;
+  border-bottom: none;
 }
 
 .my-account .nav.nav-pills .nav-link:hover,
 .my-account .nav.nav-pills .nav-link.active {
-    color: #ffffff;
-    background: #FF6F61;
+  color: #ffffff;
+  background: #ff6f61;
 }
 
 .my-account .nav.nav-pills .nav-link i {
-    margin-right: 5px;
+  margin-right: 5px;
 }
 
 .my-account .tab-content {
-    padding: 30px;
-    background: #FFE4C4;
+  padding: 30px;
+  background: #ffe4c4;
 }
 
 .my-account .tab-content .table {
-    width: 100%;
-    text-align: center;
-    margin-bottom: 0;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 0;
 }
 
 .my-account .tab-content .table .theadheader {
-    text-align: center;
-    color: #ffffff;
-    background: #FF6F61;
-    border-bottom: none;
-    vertical-align: middle;
-    border-radius: 15%;
+  text-align: center;
+  color: #ffffff;
+  background: #FF3300;
+  border-bottom: none;
+  vertical-align: middle;
+  border-radius: 15%;
 }
 
 .my-account .tab-content .table td {
-    vertical-align: middle;
+  vertical-align: middle;
 }
 
+.deliedit .adressdeli {
+    overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+/**********************************/
+/************  Upload Image **********/
+/**********************************/
+
+p {
+    margin: 0;
+  }
+  
+  .upload__box {
+    margin-top: 1.5rem;
+  }
+  .upload__inputfile {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+  }
+  .upload__btn {
+    display: inline-block;
+    font-weight: 500;
+    color: #fff;
+    text-align: center;
+    min-width: 116px;
+    padding: 5px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: 2px solid;
+    background-color: #4045ba;
+    border-color: #4045ba;
+    border-radius: 10px;
+    line-height: 26px;
+    font-size: 20px;
+    padding: 15px;
+  }
+  .upload__btn:hover {
+    background-color: unset;
+    color: #4045ba;
+    transition: all 0.3s ease;
+  }
+  .upload__btn-box {
+    margin-bottom: 10px;
+  }
+  .upload__img-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -10px;
+  }
+  .upload__img-box {
+    width: 180px;
+    padding: 0 5px;
+    margin-bottom: 12px;
+  }
+  .upload__img-close {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    text-align: center;
+    line-height: 24px;
+    z-index: 1;
+    cursor: pointer;
+  }
+  .upload__img-close:after {
+    content: "✖";
+    font-size: 14px;
+    color: white;
+  }
+  
+  .img-bg {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    padding-bottom: 100%;
+  }
+  
+
+
+
+
+/**********************************/
+/************  Login CSS **********/
+/**********************************/
+.login {
+    position: relative;
+    padding-top: 10px;
+  }
+  
+  .login-g {
+    font-size: 30px;
+  }
+  
+  .login .login-form {
+    margin: 0 auto;
+    justify-content: center;
+    align-items: center;
+    max-width: 500px;
+    max-height: 500px;
+    border-radius: 10px;
+    border: 1px solid;
+    box-shadow: 5px 5px 10px #FF3300;
+    /* position: absolute; */
+    padding: 3rem;
+    color: #FF3300;
+    margin-bottom: 30px;
+    background-color: #ffe4c4;
+  }
+  
+  .login-form i {
+    font-size: 30px;
+  }
+  
+  .login .btn-color {
+    font-size: 24px;
+    color:#ffffff;
+    background: #FF3300;
+  }

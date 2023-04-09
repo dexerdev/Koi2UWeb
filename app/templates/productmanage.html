@@ -103,22 +103,16 @@
                             <div class="bottom-bar">
                                 <div class="container-fluid">
                                     <div class="row align-items-right">
-                                        <div class="col-md-2">
+                                        <div class="col-md-3">
                                             <button class="btn btn-success" data-toggle="modal"
                                                 data-target="#addproduct"><i
                                                     class="fas fa-plus-circle mr-2"></i>เพิ่มสินค้า</button>
                                         </div>
-                                        <div class="col-md-2">
+                                        <div class="col-md-3">
                                             <button class="btn btn-success" data-toggle="modal"
                                                 data-target="#addCategory"><i
                                                     class="fas fa-plus-circle mr-2"></i>เพิ่มประเภทสินค้า</button>
-                                        </div>
-                                        <!-- <div class="col-md-5">
-                                            <div class="search">
-                                                <input type="text" placeholder="Search">
-                                                <button><i class="fa fa-search"></i></button>
-                                            </div>
-                                        </div> -->
+                                        </div>                                      
                                     </div>
                                 </div>
                             </div>
@@ -134,7 +128,15 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                
+                                <td class="text-center">1</td>
+                                <td class="text-center">Sample1</td>
+                                <td class="text-center">Exsample1</td>
+                                <td class="text-center">300</td>
+                                <td class="text-center">
+                                    <a href="#" class="settings text-warning"><i class="fas fa-cog mr-2" data-toggle="modal"
+                                        data-target="#editProductModal"></i></a>
+                                    <a href="#" class="delete text-danger"><i class="fas fa-trash-alt mr-2"></i></a>
+                                </td>
                             </tbody>
                         </table>
                     </div>
@@ -174,8 +176,8 @@
                     <!-- Edit Category End -->
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
-                    <button type="button" onclick="createCategory()" class="btn btn-primary">บันทึก</button>
+                    <button type="button" class="col-md-2 btn btn-secondary" data-dismiss="modal">ปิด</button>
+                    <button type="button" onclick="createCategory()" class="col-md-2 btn btn-primary">บันทึก</button>
                 </div>
             </div>
         </div>
@@ -226,18 +228,27 @@
                                     </div>
                                 </div>
                                 <div class="col-md-12">
-                                    <input type="file" class="custom-file-input" id="productImage"
+                                    <!-- <input type="file" class="custom-file-input" id="productImage"
                                         onchange="imageUploaded()">
-                                    <label class="custom-file-label" for="productImage">เลือกไฟล์</label>
+                                    <label class="custom-file-label" for="productImage">เลือกไฟล์</label> -->
+                                    <div class="upload__box">
+                                        <div class="upload__btn-box">
+                                          <label class="upload__btn">
+                                            <p>Upload images</p>
+                                            <input type="file" multiple="" data-max_length="20" class="upload__inputfile">
+                                          </label>
+                                        </div>
+                                        <div class="upload__img-wrap"></div>
+                                      </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <!-- Edit Product End -->
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
-                    <button type="button" onclick="createProduct()" class="btn btn-primary">บันทึก</button>
+                <div class="modal-footer ">
+                    <button type="button" class="col-md-2 btn btn-secondary" data-dismiss="modal">ปิด</button>
+                    <button type="button" onclick="createProduct()" class="col-md-2 btn btn-primary">บันทึก</button>
                 </div>
             </div>
         </div>
@@ -309,14 +320,15 @@
                     </div>
                     <!-- Edit Product End -->
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
-                    <button type="button" id="btnEditProduct" class="btn btn-primary">บันทึก</button>
+                <div class="modal-footer ">
+                    <button type="button" class="col-md-2 btn btn-secondary" data-dismiss="modal">ปิด</button>
+                    <button type="button" id="btnEditProduct" class="col-md-2 btn btn-primary">บันทึก</button>
                 </div>
             </div>
         </div>
     </div>
     <!--End Modal Edit Product -->
+
 
     <!-- Back to Top -->
     <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
@@ -328,7 +340,7 @@
     <script src="lib/slick/slick.min.js"></script> -->
     <script type="text/javascript" charset="utf8"
         src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
-        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Template Javascript -->
     <!-- <script src="static/assets/js/main.js"></script> -->
 
@@ -344,6 +356,68 @@
                 "responsive": true,
             });
         });
+
+
+        jQuery(document).ready(function () {
+  ImgUpload();
+});
+
+function ImgUpload() {
+  var imgWrap = "";
+  var imgArray = [];
+
+  $('.upload__inputfile').each(function () {
+    $(this).on('change', function (e) {
+      imgWrap = $(this).closest('.upload__box').find('.upload__img-wrap');
+      var maxLength = $(this).attr('data-max_length');
+
+      var files = e.target.files;
+      var filesArr = Array.prototype.slice.call(files);
+      var iterator = 0;
+      filesArr.forEach(function (f, index) {
+
+        if (!f.type.match('image.*')) {
+          return;
+        }
+
+        if (imgArray.length > maxLength) {
+          return false
+        } else {
+          var len = 0;
+          for (var i = 0; i < imgArray.length; i++) {
+            if (imgArray[i] !== undefined) {
+              len++;
+            }
+          }
+          if (len > maxLength) {
+            return false;
+          } else {
+            imgArray.push(f);
+
+            var reader = new FileReader();
+            reader.onload = function (e) {
+              var html = "<div class='upload__img-box'><div style='background-image: url(" + e.target.result + ")' data-number='" + $(".upload__img-close").length + "' data-file='" + f.name + "' class='img-bg'><div class='upload__img-close'></div></div></div>";
+              imgWrap.append(html);
+              iterator++;
+            }
+            reader.readAsDataURL(f);
+          }
+        }
+      });
+    });
+  });
+
+  $('body').on('click', ".upload__img-close", function (e) {
+    var file = $(this).parent().data("file");
+    for (var i = 0; i < imgArray.length; i++) {
+      if (imgArray[i].name === file) {
+        imgArray.splice(i, 1);
+        break;
+      }
+    }
+    $(this).parent().parent().remove();
+  });
+}
     </script>
 </body>
 

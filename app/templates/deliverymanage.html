@@ -1,27 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <title>E Store - eCommerce HTML Template</title>
-        <meta content="width=device-width, initial-scale=1.0" name="viewport">
-        <meta content="eCommerce HTML Template Free Download" name="keywords">
-        <meta content="eCommerce HTML Template Free Download" name="description">
 
-        <!-- Favicon -->
-        <link href="img/favicon.ico" rel="icon">
+<head>
+    <meta charset="utf-8">
+    <title>E Store - eCommerce HTML Template</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="eCommerce HTML Template Free Download" name="keywords">
+    <meta content="eCommerce HTML Template Free Download" name="description">
 
-        <!-- Google Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Source+Code+Pro:700,900&display=swap" rel="stylesheet">
+    <!-- Favicon -->
+    <!-- <link href="/static/assets/img/favicon.ico" rel="icon"> -->
 
-        <!-- CSS Libraries -->
-        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-        <link href="lib/slick/slick.css" rel="stylesheet">
-        <link href="lib/slick/slick-theme.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Mitr' rel='stylesheet'>
+    <!-- CSS Libraries -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <!-- <link href="/static/assets/lib/slick/slick.css" rel="stylesheet"> -->
+    <!-- <link href="/static/assets/lib/slick/slick-theme.css" rel="stylesheet"> -->
+    <link href="/static/assets/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
 
-        <!-- Template Stylesheet -->
-        <link href="css/style.css" rel="stylesheet">
-    </head>
+    <!-- Template Stylesheet -->
+</head>
 
     <body>
         
@@ -123,25 +124,29 @@
                                     <tr>
                                         <th class="text-center">ลำดับ</th>
                                         <th class="text-center">ชื่อผู้ซื้อ</th>
-                                        <th class="text-center">ที่อยู่</th>
+                                        <th class="adressdeli text-center">ที่อยู่ผู้ซื้อ</th>
+                                        <th class="text-center">เลขที่ใบสั่งซื้อ</th>
                                         <th class="text-center">จำนวนเงิน</th>
                                         <th class="text-center">สถานะ</th>
+                                        <th class="text-center">การจัดส่ง</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody class="deliedit">
                                     <tr>
                                         <td class="text-center">1</td>
                                         <td class="text-center">Chanu Hong </td>                                        
-                                        <td class="text-center">40 ซ.หลักเมือง โคกสำโรง</td>
+                                        <td class="adressdeli text-center">40 ซ.หลักเมือง ต.โคกสำโรง อ.โคกสำโรง จ.ลพบุรี</td>
+                                        <td class="text-center">01</td>
                                         <td class="text-center">520</td>
                                         <td class="text-center">
-                                            <a href="#" class="settings text-warning"
-                                                onclick="getProduct('{{prod.productId}}')" title="Settings"><i
+                                            <a href="#" class="settings text-warning"><i
                                                     class="fas fa-cog mr-2"></i></a>
-                                            <a href="#" class="delete text-danger"
-                                                onclick="delProduct('{{prod.productId}}')" title="Delete"><i
+                                            <a href="#" class="delete text-danger"><i
                                                     class="fas fa-trash-alt mr-2"></i></a>
                                         </td>
+                                        <td class="text-center">
+                                            <a href="#" class="settings text-success" title="Settings">
+                                            <i class="fas fa-check"></i></a>
                                     </tr>
                                 </tbody>
                             </table>

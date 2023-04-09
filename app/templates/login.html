@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>E Store - eCommerce HTML Template</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="eCommerce HTML Template Free Download" name="keywords">
+    <meta content="eCommerce HTML Template Free Download" name="description">
+
+    <!-- Favicon -->
+    <!-- <link href="/static/assets/img/favicon.ico" rel="icon"> -->
+
+    <!-- Google Fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Mitr' rel='stylesheet'>
+    <!-- CSS Libraries -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <!-- <link href="/static/assets/lib/slick/slick.css" rel="stylesheet"> -->
+    <!-- <link href="/static/assets/lib/slick/slick-theme.css" rel="stylesheet"> -->
+    <link href="/static/assets/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+
+    <!-- Template Stylesheet -->
+</head>
+
+<body>
+    <!-- Login Start -->
+    <div class="login">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-lg-6 col-md-9">
+                    <div class="row justify-content-center">
+                        <div class="text-center col-md-8 mx-auto">
+                            <a href="/"><img src="" alt=""
+                                    width="100%"></a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="login-form col-md-8 mx-auto mt-4">
+                            <div class=" justify-content-center">
+                                <div class="text-center mb-4">
+                                    <H1>LOG IN</H1>
+                                </div>
+                            </div>
+                            <div class="row d-flex flex-row mt-4">
+                                <div class="col-md-3">
+                                    <label class="col-form-label"><i class="fas fa-user"></i></label>
+                                </div>
+                                <div class="col-md-9">
+                                    <input type="text" id="username" class="form-control form-control"
+                                        placeholder="Username">
+                                </div>
+                            </div>
+                            <div class="row d-flex flex-row mt-4">
+                                <div class="col-md-3">
+                                    <label class="col-form-label"><i class="fas fa-unlock-alt"></i></label>
+                                </div>
+                                <div class="col-md-9 ml-auto">
+                                    <input type="password" id="password" class="form-control form-control form-control"
+                                        placeholder="Password">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 mt-4 mb-2">
+                                    <div class="d-flex justify-content-center align-items-center">
+                                        <button class="btn btn-color btn-ms btn-block" onclick="checkLogin()"
+                                            type="submit">LOGIN</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row justify-content-center mt-5">
+                                <div class="col-md-8 sign1">
+                                    <a href="" data-toggle="modal" data-target="#forgotpass"
+                                        style="color: #FF3300;">Forgot Password</a>
+                                </div>
+                                <div class="col-md-4 sign1">
+                                    <a href="/register" style="color: #FF3300;">SIGN UP?</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Login End -->
+    <!-- Start Modal Forgot Password -->
+    <div class="modal fade" id="forgotpass" tabindex="-1" role="dialog" aria-labelledby="forgotpassTitle"
+        aria-hidden="true">
+        <form action="/api/forgotPassword">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="forgotpassTitle">โปรดใส่ Email</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="col-12">
+                            <input type="email" id="email" name="email" class="form-control form-control" />
+                            <label class="form-label" for="email"></label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
+                        <button type="submit" class="btn btn-primary">ยืนยัน</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- End Modal Forgot Password -->
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+
+
+
+    <!-- Template Javascript -->
+    <!-- <script src="/static/assets/lib/slick/js/main.js"></script> -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="/static/assets/js/login.js"></script>
+</body>
+
+</html>
