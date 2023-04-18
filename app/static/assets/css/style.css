@@ -280,10 +280,10 @@ p {
     margin: 0;
   }
   
-  .upload__box {
+  .upload__box, .upload_edit_box {
     margin-top: 1.5rem;
   }
-  .upload__inputfile {
+  .upload__inputfile, .upload_edit_inputfile {
     width: 0.1px;
     height: 0.1px;
     opacity: 0;
@@ -291,7 +291,7 @@ p {
     position: absolute;
     z-index: -1;
   }
-  .upload__btn {
+  .upload__btn, .upload_edit_btn {
     display: inline-block;
     font-weight: 500;
     color: #fff;
@@ -308,25 +308,25 @@ p {
     font-size: 20px;
     padding: 15px;
   }
-  .upload__btn:hover {
+  .upload__btn:hover, .upload_edit_btn:hover {
     background-color: unset;
     color: #4045ba;
     transition: all 0.3s ease;
   }
-  .upload__btn-box {
+  .upload__btn-box, .upload_edit_btn-box {
     margin-bottom: 10px;
   }
-  .upload__img-wrap {
+  .upload__img-wrap, .upload_edit_img-wrap {
     display: flex;
     flex-wrap: wrap;
     margin: 0 -10px;
   }
-  .upload__img-box {
+  .upload__img-box, .upload_edit_img-box {
     width: 180px;
     padding: 0 5px;
     margin-bottom: 12px;
   }
-  .upload__img-close {
+  .upload__img-close, .upload_edit_img-close {
     width: 24px;
     height: 24px;
     border-radius: 50%;
@@ -339,7 +339,7 @@ p {
     z-index: 1;
     cursor: pointer;
   }
-  .upload__img-close:after {
+  .upload__img-close:after, .upload_edit_img-close:after {
     content: "✖";
     font-size: 14px;
     color: white;
