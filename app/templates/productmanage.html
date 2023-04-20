@@ -133,7 +133,7 @@
                                 {% for prod in productLs %}
                                 <tr>
                                     <td class="text-center"><img
-                                            src="{{ url_for('images', image_name=prod.images[0].imagePath) }}"
+                                            src="{{prod.images[0].base64Image}}"
                                             height="50px"></td>
                                     <td class="text-center">{{prod.productName}}</td>
                                     <td class="text-center">{{prod.categoryName}}</td>

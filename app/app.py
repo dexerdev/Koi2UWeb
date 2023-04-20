@@ -8,8 +8,9 @@ from datetime import timedelta
 from  flask_cors import CORS
 from functools import update_wrapper
 import requests
+from app.config import *
 
-urlAPI = 'http://127.0.0.1:5000/'
+urlAPI = UrlAPI
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'Dexertedza@1'
 app.config['SESSION_TYPE'] = 'filesystem'

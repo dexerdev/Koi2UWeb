@@ -489,18 +489,18 @@ function loadEditImages(imagesfile) {
     });
     images.forEach(image => {
         imgArrayEdit.push(image);
-        fetch('/images/' + image.imagePath).then(response => response.blob())
-            .then(blob => {
-                var reader = new FileReader();
-                reader.readAsDataURL(blob);
-                reader.onloadend = function () {
-                    var base64data = reader.result;
-                    var html = "<div class='upload_edit_img-box'><div style='background-image: url(" + base64data + ")' onclick='editImageClose(" + image.prodImgId + ")' data-number='" + $(".upload_edit_img-close").length + "' data-file='" + image.prodImgId + "' class='img-bg'><div class='upload_edit_img-close'></div></div></div>";
-                    imgWraps.forEach(imgWrap => {
-                        imgWrap.innerHTML += html;
-                    });
-                }
-            });
+        var html = "<div class='upload_edit_img-box'><div style='background-image: url(" + image.base64Image + ")' onclick='editImageClose(" + image.prodImgId + ")' data-number='" + $(".upload_edit_img-close").length + "' data-file='" + image.prodImgId + "' class='img-bg'><div class='upload_edit_img-close'></div></div></div>";
+        imgWraps.forEach(imgWrap => {
+            imgWrap.innerHTML += html;
+        });
+        // fetch('/images/' + image.imagePath).then(response => response.blob())
+        //     .then(blob => {
+        //         var reader = new FileReader();
+        //         reader.readAsDataURL(blob);
+        //         reader.onloadend = function () {
+                    
+        //         }
+        //     });
     });
 }
 function editImageClose(prodImgId) {
