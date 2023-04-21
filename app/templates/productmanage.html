@@ -54,10 +54,10 @@
                         </div> -->
                     <div class="navbar-nav ml-auto">
                         <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">User Account</a>
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">{{username}}</a>
                             <div class="dropdown-menu">
-                                <a href="#" class="dropdown-item">Login</a>
-                                <a href="#" class="dropdown-item">Register</a>
+                                <!-- <a href="#" class="dropdown-item">Login</a> -->
+                                <!-- <a href="#" class="dropdown-item">Register</a> -->
                             </div>
                         </div>
                     </div>
@@ -87,7 +87,7 @@
                                     class="fa fa-file"></i>&nbsp;&nbsp;ประวัติการสั่งซื้อ</a>
                             <a class="nav-link" id="" href="/deliverymanage" role="tab"><i
                                     class="fa fa-truck"></i>&nbsp;ตรวจสอบการส่งสินค้า</a>
-                            <a class="Logout nav-link " href="index.html"><i class="fa fa-sign-out-alt"></i>Logout</a>
+                            <a class="Logout nav-link " href="/logout"><i class="fa fa-sign-out-alt"></i>Logout</a>
                         </div>
                     </div>
                 </div>
@@ -133,7 +133,7 @@
                                 {% for prod in productLs %}
                                 <tr>
                                     <td class="text-center"><img
-                                            src="{{prod.images[0].base64Image}}"
+                                            src="{{prod.images[0].base64Image if prod.images|length != 0 else ''}}"
                                             height="50px"></td>
                                     <td class="text-center">{{prod.productName}}</td>
                                     <td class="text-center">{{prod.categoryName}}</td>
@@ -478,6 +478,8 @@
 
     </script>
     <script src="static/assets/js/productmanage.js"></script>
+    <script src="static/assets/js/session.js"></script>
+
 
 </body>
 

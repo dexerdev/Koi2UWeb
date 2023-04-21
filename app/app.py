@@ -27,8 +27,14 @@ def home():
         return render_template("login.html")
     else:
         categoryLs = requests.get(urlAPI+'api/getCategory').json()
-        return render_template("productmanage.html",categoryLs=categoryLs['data'])
+        return render_template("productmanage.html",categoryLs=categoryLs['data'],username = session['username'])
 
+@app.route('/checkSession')
+def checkSession():
+    if not 'logged_in' in session:
+        return jsonify({"result":False})
+    else:
+        return jsonify({"result":True})
 
 @app.route("/productmanage")
 def productmanage():
@@ -49,6 +55,11 @@ def usermanage():
 
 @app.route("/login")
 def login():
+    return render_template("login.html")
+
+@app.route('/logout')
+def logout():
+    session.pop('logged_in', None)
     return render_template("login.html")
 
 @app.route("/billmanage")
@@ -89,11 +100,6 @@ def checkLogin():
         result.message = "Failed!!"
         result.error = str(e)
     return jsonify(result.__dict__)
-
-@app.route('/logout')
-def logout():
-    session.pop('logged_in', None)
-    return redirect(url_for('login'))
 
 @app.route('/api/createCategory',methods=['POST'])
 def createCategory():
