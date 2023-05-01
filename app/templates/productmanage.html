@@ -79,6 +79,8 @@
                             </div>
                             <a class="nav-link" id="" href="/productmanage" role="tab"><i
                                     class="fa fa-shopping-bag"></i>&nbsp;&nbsp;การจัดการสินค้า</a>
+                            <a class="nav-link" id="" href="/productgroup" role="tab"><i
+                                class="fa fa-shopping-bag"></i>&nbsp;&nbsp;การจัดการกลุ่มสินค้า</a>
                             <a class="nav-link" id="" href="/usermanage" role="tab"><i
                                     class="fa fa-user"></i>&nbsp;&nbsp;การจัดการสมาชิก</a>
                             <a class="nav-link" id="" href="/billmanage" role="tab"><i
@@ -146,7 +148,8 @@
                                         <a href="#" class="settings text-warning"
                                             onclick="getProduct('{{prod.productId}}')" title="Settings"><i
                                                 class="fas fa-cog mr-2"></i></a>
-                                        <a href="#" class="delete text-danger"><i class="fas fa-trash-alt mr-2"></i></a>
+                                        <a href="#" class="delete text-danger" onclick="delProduct('{{prod.productId}}')">
+                                            <i class="fas fa-trash-alt mr-2"></i></a>
                                     </td>
                                 </tr>
                                 {% endfor %}
@@ -475,7 +478,9 @@
                 "responsive": true,
             });
         });
+        
 
+        
     </script>
     <script src="static/assets/js/productmanage.js"></script>
     <script src="static/assets/js/session.js"></script>

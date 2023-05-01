@@ -202,46 +202,6 @@ function editImageUploaded() {
 //     });
 // }
 
-function delProduct(productId) {
-    var url = '/api/delProduct?productId=' + productId;
-    Swal.fire({
-        title: 'ต้องการลบสินค้า ?',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes',
-    }).then((result) => {
-        if (result.isConfirmed) {
-            fetch(url, {
-                method: 'DELETE',
-                headers: {
-                    "Content-type": "application/json; charset=UTF-8"
-                }
-            }).then(response => response.json()).then((json) => {
-                if (json.success) {
-                    Swal.fire({
-                        title: 'ลบสินค้าเรียบร้อย',
-                        icon: 'success',
-                        showconfirmbutton: true,
-                        allowoutsideclick: false,
-                        allowescapekey: false
-                    }).then(function () {
-                        //console.log(json.data);
-                        window.location.href = "/productmanage";
-                    });
-                }
-                else {
-                    Swal.fire(
-                        'ลบสินค้าไม่สำเร็จ',
-                        '',
-                        'error'
-                    );
-                }
-            });
-        }
-    })
-}
 
 
 
@@ -640,4 +600,46 @@ function editProduct(productId) {
             );
         }
     });
+}
+
+
+function delProduct(productId) {
+    var url = '/api/delProduct?productId=' + productId;
+    Swal.fire({
+        title: 'ต้องการลบสินค้า ?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes',
+    }).then((result) => {
+        if (result.isConfirmed) {
+            fetch(url, {
+                method: 'DELETE',
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8"
+                }
+            }).then(response => response.json()).then((json) => {
+                if (json.success) {
+                    Swal.fire({
+                        title: 'ลบสินค้าเรียบร้อย',
+                        icon: 'success',
+                        showconfirmbutton: true,
+                        allowoutsideclick: false,
+                        allowescapekey: false
+                    }).then(function () {
+                        //console.log(json.data);
+                        window.location.href = "/productmanage";
+                    });
+                }
+                else {
+                    Swal.fire(
+                        'ลบสินค้าไม่สำเร็จ',
+                        '',
+                        'error'
+                    );
+                }
+            });
+        }
+    })
 }

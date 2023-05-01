@@ -27,7 +27,8 @@ def home():
         return render_template("login.html")
     else:
         categoryLs = requests.get(urlAPI+'api/getCategory').json()
-        return render_template("productmanage.html",categoryLs=categoryLs['data'],username = session['username'])
+        productLs = requests.get(urlAPI+'api/getProductAll').json()
+        return render_template("productmanage.html",categoryLs=categoryLs['data'],productLs=productLs['data'],username = session['username'])
 
 @app.route('/checkSession')
 def checkSession():
@@ -45,13 +46,33 @@ def productmanage():
         if not 'logged_in' in session:
             return render_template("login.html")
         else:
-            return render_template("productmanage.html",categoryLs=categoryLs['data'],productLs=productLs['data'])
+            return render_template("productmanage.html",categoryLs=categoryLs['data'],productLs=productLs['data'],username = session['username'])
+    except Exception as e:
+        raise e
+
+@app.route('/productgroup')
+def productgroup():
+    try:
+        productTop = requests.get(urlAPI+'api/getProductGroupTop').json()
+        productLs = requests.get(urlAPI+'api/getProductAll').json()
+        if not 'logged_in' in session:
+            return render_template("login.html")
+        else:
+            return render_template("productgroup.html",productTop=productTop['data'],productLs=productLs['data'],username = session['username'])
     except Exception as e:
         raise e
 
 @app.route("/usermanage")
 def usermanage(): 
-    return render_template("usermanage.html") 
+    try:
+        userLs = requests.get(urlAPI+'api/getUserAll').json()
+        if not 'logged_in' in session:
+            return render_template("login.html")
+        else:
+            # return render_template("productgroup.html",productTop=productTop['data'],productLs=productLs['data'],username = session['username'])
+            return render_template("usermanage.html",userLs=userLs['data'],username = session['username']) 
+    except Exception as e:
+        raise e
 
 @app.route("/login")
 def login():
@@ -204,6 +225,121 @@ def editProduct():
             files.append(('productImages', (file.filename, file.read(), file.content_type)))
         response = requests.request("PUT", urlAPI+'api/editProduct',data=payload,files=files).json()
         result.data = response
+        result.success = True
+        result.message = "Completed!!"
+    except Exception as e:
+        result.success = False
+        result.message = "Failed!!"
+        result.error = str(e)
+    return jsonify(result.__dict__)
+
+@app.route('/api/delProduct',methods=['DELETE'])
+def delProduct():
+    try:
+        result = apiResult.apiResult()
+        productId = request.args.get('productId')
+        prod = requests.delete(urlAPI+'api/delProduct',params={"productId":productId}).json()
+        result.data = prod
+        result.success = True
+        result.message = "Completed!!"
+    except Exception as e:
+        result.success = False
+        result.message = "Failed!!"
+        result.error = str(e)
+    return jsonify(result.__dict__)
+
+
+@app.route('/api/createProductGroup',methods=['POST'])
+def createProductGroup():
+    try:
+        result = apiResult.apiResult()
+        prodGrouptName = request.json.get('prodGrouptName')
+        createDate = request.json.get('createDate')
+        activeFlag = request.json.get('activeFlag')
+        productIdList = request.json.get('productIdList')
+        payload = {
+            "prodGrouptName":prodGrouptName,
+            "createDate": createDate,
+            "updateDate": createDate,
+            "productIdList": productIdList,
+            "activeFlag":activeFlag
+        }
+        prodG = requests.post(urlAPI+'api/createProductGroup',json=payload).json()
+        result.data = prodG
+        result.success = True
+        result.message = "Completed!!"
+    except Exception as e:
+        result.success = False
+        result.message = "Failed!!"
+        result.error = str(e)
+    return jsonify(result.__dict__)
+
+
+
+@app.route('/api/getProductGroupTopId')
+def getProductGroupTopId():
+    try:
+        result = apiResult.apiResult()
+        prodGroupId = request.args.get('prodGroupId')
+        prod = requests.get(urlAPI+'api/getProductGroupTopId',params={"prodGroupId":prodGroupId}).json()
+        result.data = prod['data']
+        result.success = True
+        result.message = "Completed!!"
+    except Exception as e:
+        result.success = False
+        result.message = "Failed!!"
+        result.error = str(e)
+    return jsonify(result.__dict__)
+
+@app.route('/api/delProductGroup',methods=['DELETE'])
+def delProductGroup():
+    try:
+        result = apiResult.apiResult()
+        prodGroupId = request.args.get('prodGroupId')
+        prod = requests.delete(urlAPI+'api/delProductGroup',params={"prodGroupId":prodGroupId}).json()
+        result.data = prod
+        result.success = True
+        result.message = "Completed!!"
+    except Exception as e:
+        result.success = False
+        result.message = "Failed!!"
+        result.error = str(e)
+    return jsonify(result.__dict__)
+
+@app.route('/api/editProductGroup',methods=['PUT'])
+def editProductGroup():
+    try:
+        result = apiResult.apiResult()
+        prodGroupId = request.json.get('prodGroupId')
+        prodGrouptName = request.json.get('prodGrouptName')
+        updateDate = request.json.get('updateDate')
+        activeFlag = request.json.get('activeFlag')
+        productIdList = request.json.get('productIdList')
+        payload = {
+            "prodGroupId":prodGroupId,
+            "prodGrouptName":prodGrouptName,
+            "updateDate": updateDate,
+            "productIdList": productIdList,
+            "activeFlag":activeFlag
+        }
+        prodG = requests.request("PUT",urlAPI+'api/editProductGroup',json=payload).json()
+        result.data = prodG
+        result.success = True
+        result.message = "Completed!!"
+    except Exception as e:
+        result.success = False
+        result.message = "Failed!!"
+        result.error = str(e)
+    return jsonify(result.__dict__)
+
+
+@app.route('/api/getUserProfile')
+def getUserProfile():
+    try:
+        result = apiResult.apiResult()
+        userId = request.args.get('userId')
+        usr = requests.get(urlAPI+'api/getUserProfile',params={"userId":userId}).json()
+        result.data = usr['data']
         result.success = True
         result.message = "Completed!!"
     except Exception as e:
