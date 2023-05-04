@@ -206,7 +206,7 @@ function editImageUploaded() {
 
 
 /// new 
-let stopFlag = false;
+// let stopFlag = false;
 function createProduct() {
     var productName = document.getElementById("productName").value;
     var productDetail = document.getElementById("productDetail").value;
@@ -419,7 +419,7 @@ function getProduct(productId) {
     var url = '/api/getProduct?productId=' + productId;
     fetch(url).then(response => response.json()).then((json) => {
         if (json.success) {
-            console.log(json.data);
+            // console.log(json.data);
             document.getElementById("editCategory").value = json.data.categoryId;
             document.getElementById("editProductName").value = json.data.productName;
             document.getElementById("editProductPrice").value = json.data.price;
@@ -443,6 +443,7 @@ function getProduct(productId) {
 
 function loadEditImages(imagesfile) {
     const images = imagesfile;
+    imgArrayEdit = [];
     var imgWraps = document.querySelectorAll('.upload_edit_img-wrap');
     imgWraps.forEach(imgWrap => {
         imgWrap.innerHTML = '';
@@ -476,25 +477,27 @@ function editImageClose(prodImgId) {
 }
 function EditImgUpload() {
     var editImgWrap = "";
-
+    var stopFlag = false;
+    document.getElementById('upload_edit_inputfile').value = "";
     $('.upload_edit_inputfile').each(function () {
         if (stopFlag) {
             return false;
         }
         else {
+            // console.log($(this));
             $(this).on('change', function (e) {
                 editImgWrap = $(this).closest('.upload_edit_box').find('.upload_edit_img-wrap');
                 var maxLength = $(this).attr('data-max_length');
-                console.log(editImgWrap);
+                // console.log(editImgWrap);
                 var files = e.target.files;
-                console.log(files);
+                // console.log(files);
                 var filesArr = Array.prototype.slice.call(files);
                 var iterator = 0;
                 filesArr.forEach(function (f, index) {
                     if (!f.type.match('image.*')) {
                         return;
                     }
-                    console.log(f);
+                    // console.log(f);
                     if (imgArrayEdit.length > maxLength) {
                         return false
                     } else {
@@ -508,19 +511,21 @@ function EditImgUpload() {
                             return false;
                         } else {
                             imgArrayEdit.push(f);
-                            // console.log(f)
+                            console.log(imgArrayEdit);
                             // formData.append('productImages', f);
                             var reader = new FileReader();
+                            
                             reader.onload = function (e) {
                                 var html = "<div class='upload_edit_img-box'><div style='background-image: url(" + e.target.result + ")' data-number='" + $(".upload_edit_img-close").length + "' data-file='" + f.name + "' class='img-bg'><div class='upload_edit_img-close'></div></div></div>";
                                 editImgWrap.append(html);
                                 iterator++;
                             }
                             reader.readAsDataURL(f);
+                            document.getElementById('upload_edit_inputfile').value = "";
+                            stopFlag = true;
                         }
                     }
                 });
-                stopFlag = true;
             });
         }
     });

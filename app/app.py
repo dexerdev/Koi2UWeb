@@ -18,7 +18,6 @@ Session(app)
 
 from .models import apiResult
 
-
 @app.route("/")
 def home():
     username = request.cookies.get('username')
