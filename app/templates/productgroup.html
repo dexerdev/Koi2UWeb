@@ -3,10 +3,10 @@
 
 <head>
     <meta charset="utf-8">
-    <title>E Store - eCommerce HTML Template</title>
+    <title>E Store - eCommerce </title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="eCommerce HTML Template Free Download" name="keywords">
-    <meta content="eCommerce HTML Template Free Download" name="description">
+    <meta content="eCommerce" name="keywords">
+    <meta content="eCommerce" name="description">
 
     <!-- Favicon -->
     <!-- <link href="/static/assets/img/favicon.ico" rel="icon"> -->
@@ -55,10 +55,6 @@
                     <div class="navbar-nav ml-auto">
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">{{username}}</a>
-                            <div class="dropdown-menu">
-                                <!-- <a href="#" class="dropdown-item">Login</a> -->
-                                <!-- <a href="#" class="dropdown-item">Register</a> -->
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -81,14 +77,16 @@
                                     class="fa fa-shopping-bag"></i>&nbsp;&nbsp;การจัดการสินค้า</a>
                             <a class="nav-link" id="" href="/productgroup" role="tab"><i
                                     class="fa fa-shopping-bag"></i>&nbsp;&nbsp;การจัดการกลุ่มสินค้า</a>
+                            <a class="nav-link" id="" href="/promotionmanage" role="tab">
+                                <i class="fas fa-gift"></i>&nbsp;&nbsp;การจัดโปรโมชัน</a>
                             <a class="nav-link" id="" href="/usermanage" role="tab"><i
                                     class="fa fa-user"></i>&nbsp;&nbsp;การจัดการสมาชิก</a>
-                            <a class="nav-link" id="" href="/billmanage" role="tab"><i
+                            <!-- <a class="nav-link" id="" href="/billmanage" role="tab"><i
                                     class="fa fa-shopping-cart"></i>&nbsp;ตรวจสอบการสั่งสินค้า</a>
                             <a class="nav-link" id="" href="/orderhistory" role="tab"><i
                                     class="fa fa-file"></i>&nbsp;&nbsp;ประวัติการสั่งซื้อ</a>
                             <a class="nav-link" id="" href="/deliverymanage" role="tab"><i
-                                    class="fa fa-truck"></i>&nbsp;ตรวจสอบการส่งสินค้า</a>
+                                    class="fa fa-truck"></i>&nbsp;ตรวจสอบการส่งสินค้า</a> -->
                             <a class="Logout nav-link " href="/logout"><i class="fa fa-sign-out-alt"></i>Logout</a>
                         </div>
                     </div>
@@ -106,8 +104,8 @@
                                 <div class="container-fluid">
                                     <div class="row align-items-right">
                                         <div class="col-md-3">
-                                            <button class="btn btn-success" data-toggle="modal" onclick="addproductGroup()"
-                                                ><i
+                                            <button class="btn btn-success" data-toggle="modal"
+                                                onclick="addproductGroup()"><i
                                                     class="fas fa-plus-circle mr-2"></i>เพิ่มกลุ่มสินค้า</button>
                                         </div>
                                     </div>
@@ -217,7 +215,8 @@
                 </div>
                 <div class="modal-footer ">
                     <button type="button" class="col-md-2 btn btn-secondary" data-dismiss="modal">ปิด</button>
-                    <button type="button" onclick="createProductGroup()" class="col-md-2 btn btn-primary">บันทึก</button>
+                    <button type="button" onclick="createProductGroup()"
+                        class="col-md-2 btn btn-primary">บันทึก</button>
                 </div>
             </div>
         </div>
@@ -249,10 +248,10 @@
                         <tbody>
                             {% for prod in productLs %}
                             <tr>
-                                <td class="text-center"><input type="checkbox" id="{{prod.productId}}"></td> 
+                                <td class="text-center"><input type="checkbox" id="{{prod.productId}}"></td>
                                 <td class="text-center"><img
-                                    src="{{prod.images[0].base64Image if prod.images|length != 0 else ''}}"
-                                    height="30px"></td>
+                                        src="{{prod.images[0].base64Image if prod.images|length != 0 else ''}}"
+                                        height="30px"></td>
                                 <td class="text-center">{{prod.productName}}</td>
                                 <td class="text-center">{{prod.categoryName}}</td>
                                 <td class="text-center">{{prod.price}}</td>
@@ -264,7 +263,8 @@
                 </div>
                 <div class="modal-footer ">
                     <button type="button" class="col-md-2 btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
-                    <button type="button" id="btnAddProductToTable" onclick="addProductToTable()" class="col-md-2 btn btn-primary">ตกลง</button>
+                    <button type="button" id="btnAddProductToTable" onclick="addProductToTable()"
+                        class="col-md-2 btn btn-primary">ตกลง</button>
                 </div>
             </div>
         </div>
@@ -272,8 +272,8 @@
     <!--End Sub Modal Add ProductAll -->
 
     <!--Start Modal Edit Product -->
-    <div class="modal fade" id="editProductGroupModal" tabindex="-1" role="dialog" aria-labelledby="editproductGroupTitle"
-        aria-hidden="true">
+    <div class="modal fade" id="editProductGroupModal" tabindex="-1" role="dialog"
+        aria-labelledby="editproductGroupTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -291,7 +291,7 @@
                                     <div class="row">
                                         <div class="col-7">
                                             <span class="ml-1">ชื่อกลุ่มสินค้า</span><span style="color: red;">*</span>
-                                            <input type="text" id="editProductGroupName" class="form-control" >
+                                            <input type="text" id="editProductGroupName" class="form-control">
                                         </div>
                                         <div class="col-5">
                                             <span class="ml-1">สถานะ</span>

@@ -3,8 +3,7 @@ import os
 from flask import Flask,request,jsonify,make_response,current_app, redirect,url_for,session,send_from_directory
 from flask.templating import render_template
 from flask_session import Session
-from datetime import datetime, date
-from datetime import timedelta
+from datetime import datetime, date,timedelta
 from  flask_cors import CORS
 from functools import update_wrapper
 import requests
@@ -93,6 +92,21 @@ def orderhistory():
 @app.route("/deliverymanage")
 def deliverymanage(): 
     return render_template("deliverymanage.html") 
+
+@app.route("/promotionmanage")
+def promotionmanage(): 
+    promoLs = requests.get(urlAPI+'api/getPromotion').json()
+    for promo in promoLs['data']:
+        dateFormat = "%Y-%m-%dT%H:%M:%S"
+        dateString = '%d/%m/%Y %H:%M'
+        startDateStr = promo['startDate']
+        endDateStr = promo['endDate']
+        startDate = datetime.strptime(startDateStr, dateFormat)
+        endDate = datetime.strptime(endDateStr, dateFormat)
+        promo['startDate'] = startDate.strftime(dateString)
+        promo['endDate'] = endDate.strftime(dateString)
+        promo['discountType'] = 'เปอร์เซ็นต์' if promo['discountType'] == 'percentage' else 'บาท'
+    return render_template("promotionmanage.html",promoLs=promoLs['data'],username = session['username']) 
 
 
 @app.route('/api/checkLogin',methods=['POST'])
@@ -346,3 +360,114 @@ def getUserProfile():
         result.message = "Failed!!"
         result.error = str(e)
     return jsonify(result.__dict__)
+
+
+@app.route('/api/getPromotionId')
+def getPromotionId():
+    try:
+        result = apiResult.apiResult()
+        promoId = request.args.get('promoId')
+        promo = requests.get(urlAPI+'api/getPromotionId',params={"promoId":promoId}).json()
+        result.data = promo['data']
+        result.success = True
+        result.message = "Completed!!"
+    except Exception as e:
+        result.success = False
+        result.message = "Failed!!"
+        result.error = str(e)
+    return jsonify(result.__dict__)
+
+@app.route('/api/editPromotion',methods=['PUT'])
+def editPromotion():
+    try:
+        result = apiResult.apiResult()
+        promoId = request.json.get('promoId')
+        promoCode = request.json.get('promoCode')
+        promoDescription = request.json.get('promoDescription')
+        startDate = request.json.get('startDate')
+        endDate = request.json.get('endDate')
+        targetAmount = request.json.get('targetAmount')
+        discount = request.json.get('discount')
+        discountType = request.json.get('discountType')
+        limitCode = request.json.get('limitCode')
+        updateDate = request.json.get('updateDate')
+        activeFlag = request.json.get('activeFlag')
+        payload = {
+            "promoId":promoId,
+            "promoCode": promoCode,
+            "promoDescription": promoDescription,
+            "startDate":startDate,
+            "endDate":endDate,
+            "targetAmount":targetAmount,
+            "discount":discount,
+            "discountType":discountType,
+            "activeFlag": activeFlag,
+            "limitCode": limitCode,
+            "updateDate": updateDate
+        }
+        promo = requests.request("PUT",urlAPI+'api/editPromotion',json=payload).json()
+        result.data = promo['data']
+        result.success = True
+        result.message = "Completed!!"
+    except Exception as e:
+        result.success = False
+        result.message = "Failed!!"
+        result.error = str(e)
+    return jsonify(result.__dict__)
+
+
+
+@app.route('/api/createPromotion',methods=['POST'])
+def createPromotion():
+    try:
+        result = apiResult.apiResult()
+        promoCode = request.json.get('promoCode')
+        promoDescription = request.json.get('promoDescription')
+        startDate = request.json.get('startDate')
+        endDate = request.json.get('endDate')
+        targetAmount = request.json.get('targetAmount')
+        discount = request.json.get('discount')
+        discountType = request.json.get('discountType')
+        limitCode = request.json.get('limitCode')
+        updateDate = request.json.get('updateDate')
+        createDate = request.json.get('createDate')
+        activeFlag = request.json.get('activeFlag')
+        payload = {
+            "promoCode": promoCode,
+            "promoDescription": promoDescription,
+            "startDate":startDate,
+            "endDate":endDate,
+            "targetAmount":targetAmount,
+            "discount":discount,
+            "discountType":discountType,
+            "activeFlag": activeFlag,
+            "limitCode": limitCode,
+            "updateDate": updateDate,
+            "createDate":createDate
+        }
+        promo = requests.request("POST",urlAPI+'api/createPromotion',json=payload).json()
+        result.data = promo['data']
+        result.success = True
+        result.message = "Completed!!"
+    except Exception as e:
+        result.success = False
+        result.message = "Failed!!"
+        result.error = str(e)
+    return jsonify(result.__dict__)
+
+
+@app.route('/api/delPromotionId',methods=['DELETE'])
+def delPromotionId():
+    try:
+        result = apiResult.apiResult()
+        promoId = request.args.get('promoId')
+        promo = requests.delete(urlAPI+'api/delPromotion',params={"promoId":promoId}).json()
+        result.data = promo
+        result.success = True
+        result.message = "Completed!!"
+    except Exception as e:
+        result.success = False
+        result.message = "Failed!!"
+        result.error = str(e)
+    return jsonify(result.__dict__)
+

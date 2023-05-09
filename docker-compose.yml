@@ -3,10 +3,10 @@ services:
   api:
     build: .
     platform: linux/amd64
-    image: "registry.gitlab.com/armuro.rey.dev/container-registry/koi-web:1.0.6"
+    image: "registry.gitlab.com/armuro.rey.dev/container-registry/koi-web:1.0.7"
     container_name: koi-web
     network_mode: bridge
     ports:
-      - "8006:5000"
-    environment:
+      - "8006:5000"-
+    environment:-
       - UrlAPI=${UrlAPI}
