@@ -24,8 +24,8 @@
     <!-- Template Stylesheet -->
 </head>
 
-    <body>
-        
+<body>
+
     <!-- Nav Bar Start -->
     <div class="nav">
         <div class="container-fluid">
@@ -54,11 +54,7 @@
                         </div> -->
                     <div class="navbar-nav ml-auto">
                         <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">User Account</a>
-                            <div class="dropdown-menu">
-                                <a href="#" class="dropdown-item">Login</a>
-                                <a href="#" class="dropdown-item">Register</a>
-                            </div>
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">{{username}}</a>
                         </div>
                     </div>
                 </div>
@@ -66,110 +62,140 @@
         </div>
     </div>
     <!-- Nav Bar End -->
-      
-        
-        <!-- My Account Start -->
-        <div class="my-account">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-3">
+
+
+    <!-- My Account Start -->
+    <div class="my-account">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="nav flex-column nav-pills" role="tablist" aria-orientation="vertical">
                         <div class="nav flex-column nav-pills" role="tablist" aria-orientation="vertical">
-                            <div class="nav flex-column nav-pills" role="tablist" aria-orientation="vertical">
-                                <div class="head-manage text-center">
-                                    <h2>การจัดการข้อมูล</h2>
-                                </div>
-                                <a class="nav-link" id="" href="/productmanage" role="tab"><i
-                                        class="fa fa-shopping-bag"></i>&nbsp;&nbsp;การจัดการสินค้า</a>
-                                <a class="nav-link" id="" href="/usermanage" role="tab"><i
-                                        class="fa fa-user"></i>&nbsp;&nbsp;การจัดการสมาชิก</a>
-                                <a class="nav-link" id="" href="/billmanage" role="tab"><i
-                                        class="fa fa-shopping-cart"></i>&nbsp;ตรวจสอบการสั่งสินค้า</a>
-                                <a class="nav-link" id="" href="/orderhistory" role="tab"><i
-                                        class="fa fa-file"></i>&nbsp;&nbsp;ประวัติการสั่งซื้อ</a>
-                                <a class="nav-link" id="" href="/deliverymanage" role="tab"><i
-                                        class="fa fa-truck"></i>&nbsp;ตรวจสอบการส่งสินค้า</a>
-                                <a class="Logout nav-link " href="index.html"><i class="fa fa-sign-out-alt"></i>Logout</a>
+                            <div class="head-manage text-center">
+                                <h2>การจัดการข้อมูล</h2>
                             </div>
+                            <a class="nav-link" id="" href="/productmanage" role="tab"><i
+                                    class="fa fa-shopping-bag"></i>&nbsp;&nbsp;การจัดการสินค้า</a>
+                            <a class="nav-link" id="" href="/productgroup" role="tab"><i
+                                    class="fa fa-shopping-bag"></i>&nbsp;&nbsp;การจัดการกลุ่มสินค้า</a>
+                            <a class="nav-link" id="" href="/promotionmanage" role="tab">
+                                <i class="fas fa-gift"></i>&nbsp;&nbsp;การจัดโปรโมชัน</a>
+                            <a class="nav-link" id="" href="/usermanage" role="tab"><i
+                                    class="fa fa-user"></i>&nbsp;&nbsp;การจัดการสมาชิก</a>
+                            <a class="nav-link" id="" href="/billmanage" role="tab"><i
+                                    class="fa fa-shopping-cart"></i>&nbsp;ตรวจสอบการสั่งสินค้า</a>
+                            <a class="nav-link" id="" href="/deliverymanage" role="tab"><i
+                                    class="fa fa-truck"></i>&nbsp;ตรวจสอบการส่งสินค้า</a>
+                            <a class="nav-link" id="" href="/orderhistory" role="tab"><i
+                                    class="fa fa-file"></i>&nbsp;&nbsp;ประวัติการสั่งซื้อ</a>
+                            <a class="Logout nav-link " href="index.html"><i class="fa fa-sign-out-alt"></i>Logout</a>
                         </div>
                     </div>
-                    <div class="col-md-9">
-                        <div class="tab-content">
-                            <div class="tab-pane fade show active" id="productmanage" role="tabpanel"
-                                aria-labelledby="productmanage-nav">
-                                <div class="text-center">
-                                    <h2>ตรวจสอบการส่งสินค้า</h2>
-                                </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="tab-content">
+                        <div class="tab-pane fade show active" id="deliverymanage" role="tabpanel"
+                            aria-labelledby="deliverymanage-nav">
+                            <div class="text-center">
+                                <h2>ตรวจสอบการส่งสินค้า</h2>
                             </div>
-                            <div class="addproduct"><!-- Bottom Bar Start -->
-                                <div class="bottom-bar">
-                                    <div class="container-fluid">
-                                        <div class="row align-items-center justify-content-between">
-                                            <div class="col-md-3">
-                                                <!-- <button class="btn btn-success" data-toggle="modal"
-                                                    data-target="#addproduct"><i
-                                                        class="fas fa-plus-circle mr-2"></i>เพิ่มสินค้า</button> -->
-                                            </div>
-                                            <div class="col-md-5">
-                                                <div class="search">
-                                                    <input type="text" placeholder="Search">
-                                                    <button><i class="fa fa-search"></i></button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div><!-- Bottom Bar End -->
-                            <table id="tableProduct" class="table table-striped table-hover">
-                                <thead class="theadheader">
-                                    <tr>
-                                        <th class="text-center">ลำดับ</th>
-                                        <th class="text-center">ชื่อผู้ซื้อ</th>
-                                        <th class="adressdeli text-center">ที่อยู่ผู้ซื้อ</th>
-                                        <th class="text-center">เลขที่ใบสั่งซื้อ</th>
-                                        <th class="text-center">จำนวนเงิน</th>
-                                        <th class="text-center">สถานะ</th>
-                                        <th class="text-center">การจัดส่ง</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="deliedit">
-                                    <tr>
-                                        <td class="text-center">1</td>
-                                        <td class="text-center">Chanu Hong </td>                                        
-                                        <td class="adressdeli text-center">40 ซ.หลักเมือง ต.โคกสำโรง อ.โคกสำโรง จ.ลพบุรี</td>
-                                        <td class="text-center">01</td>
-                                        <td class="text-center">520</td>
-                                        <td class="text-center">
-                                            <a href="#" class="settings text-warning"><i
-                                                    class="fas fa-cog mr-2"></i></a>
-                                            <a href="#" class="delete text-danger"><i
-                                                    class="fas fa-trash-alt mr-2"></i></a>
-                                        </td>
-                                        <td class="text-center">
-                                            <a href="#" class="settings text-success" title="Settings">
-                                            <i class="fas fa-check"></i></a>
-                                    </tr>
-                                </tbody>
-                            </table>
                         </div>
+
+                        <table id="tableDelivery" class="table table-striped table-hover">
+                            <thead class="theadheader">
+                                <tr>
+                                    <!-- <th class="text-center">ชื่อผู้สั่ง</th> -->
+                                    <th class="adressdeli text-center">ชื่อผู้รับ</th>
+                                    <th class="adressdeli text-center">เบอร์โทร</th>
+                                    <th class="adressdeli text-center">ที่อยู่จัดส่ง</th>
+                                    <th class="text-center">เลขที่ใบสั่งซื้อ</th>
+                                    <th class="text-center">จำนวนเงิน</th>
+                                    <th class="text-center">สถานะ</th>
+                                    <th class="text-center">การจัดส่ง</th>
+                                </tr>
+                            </thead>
+                            <tbody class="deliedit">
+                                {% for deli in deliveryList %}
+                                <tr>
+                                    <!-- <td class="text-center">{{deli.firstName}} {{deli.lastName}}</td> -->
+                                    <td class="text-center">{{deli.contactName}}</td>
+                                    <td class="text-center">{{deli.telNo}}</td>
+                                    <td class="text-center">{{deli.addressText}} {{deli.subDistrict}} {{deli.district}}
+                                        {{deli.province}} {{deli.zipcode}}</td>
+                                    <td class="text-center">
+                                        {% if deli.paymentStatus == "PAID" %}
+                                        <a href="/invoice?paymentId={{deli.paymentId}}">
+                                            {% endif %}
+                                            {{deli.paymentId}}</a>
+                                    </td>
+                                    <td class="text-center">{{deli.totalAmount}}</td>
+                                    <td class="text-center"><span>
+                                            {% if deli.status == "PENDING" and deli.paymentStatus == "PAID" %} รอจัดส่ง
+                                            {% elif deli.status == "PENDING" and deli.paymentStatus != "PAID" %}
+                                            รอชำระเงิน
+                                            {% elif deli.status == "DELIVERED" %} จัดส่งแล้ว
+                                            {% else %} ยกเลิก
+                                            {% endif %}
+                                        </span></td>
+                                    <td class="text-center">
+                                        {% if deli.status == "PENDING" and deli.paymentStatus == "PAID" %}
+                                        <a href="#" class="settings text-success" title="Settings"
+                                            onclick="delivered('{{deli.deliveryId}}')">
+                                            <i class="fas fa-check"></i></a>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                                <!-- <tr>
+                                    <td class="text-center">1</td>
+                                    <td class="text-center">Chanu Hong </td>
+                                    <td class="adressdeli text-center">40 ซ.หลักเมือง ต.โคกสำโรง อ.โคกสำโรง จ.ลพบุรี
+                                    </td>
+                                    <td class="text-center">01</td>
+                                    <td class="text-center">520</td>
+                                    <td class="text-center">
+                                        <a href="#" class="settings text-warning"><i class="fas fa-cog mr-2"></i></a>
+                                        <a href="#" class="delete text-danger"><i class="fas fa-trash-alt mr-2"></i></a>
+                                    </td>
+                                    <td class="text-center">
+                                        <a href="#" class="settings text-success" title="Settings">
+                                            <i class="fas fa-check"></i></a>
+                                </tr> -->
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- My Account End -->
-        
-        
-        
-        <!-- Back to Top -->
-        <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
-        
-        <!-- JavaScript Libraries -->
-        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-        <script src="lib/easing/easing.min.js"></script>
-        <script src="lib/slick/slick.min.js"></script>
-        
-        <!-- Template Javascript -->
-        <script src="static/assets/js/session.js"></script>
+    </div>
+    <!-- My Account End -->
 
-    </body>
+
+
+    <!-- Back to Top -->
+    <!-- <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a> -->
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="text/javascript" charset="utf8"
+        src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+    <script src="static/assets/js/deliverymanage.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="static/assets/js/session.js"></script>
+    <script>
+        $('#tableDelivery').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": true,
+            "ordering": true,
+            "info": false,
+            "autoWidth": false,
+            "responsive": true,
+        });
+    </script>
+</body>
+
 </html>

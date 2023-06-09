@@ -8,6 +8,8 @@ from  flask_cors import CORS
 from functools import update_wrapper
 import requests
 from app.config import *
+from app.general import *
+
 
 urlAPI = UrlAPI
 app = Flask(__name__)
@@ -15,7 +17,7 @@ app.config['SECRET_KEY'] = 'Dexertedza@1'
 app.config['SESSION_TYPE'] = 'filesystem'
 Session(app)
 
-from .models import apiResult
+from .models import apiResult,paymentModel
 
 @app.route("/")
 def home():
@@ -83,15 +85,51 @@ def logout():
 
 @app.route("/billmanage")
 def billmanage(): 
-    return render_template("billmanage.html") 
+    paymentList = requests.get(urlAPI+'api/getPaymentListAll').json()
+    for pay in paymentList['data']:
+        if pay['payDate'] != None:
+            payDate = pay['payDate'].replace('T',' ')
+        else:
+            payDate = ''
+        if pay['updateDate'] != None:
+            updateDate = pay['updateDate'].replace('T',' ')
+        else:
+            updateDate = ''
+        pay['updateDate'] = updateDate
+        pay['payDate'] = payDate
+    if not 'logged_in' in session:
+        return render_template("login.html")
+    else:
+        return render_template("billmanage.html",username = session['username'],paymentList = paymentList['data'])
+
 
 @app.route("/orderhistory")
 def orderhistory(): 
-    return render_template("orderhistory.html") 
+    orderList = requests.get(urlAPI+'api/getOrderList').json()
+    for order in orderList['data']:
+        if order['updateDate'] != None:
+            updateDate = order['updateDate'].replace('T',' ')
+        else:
+            updateDate = ''
+        order['updateDate'] = updateDate
+    if not 'logged_in' in session:
+        return render_template("login.html")
+    else:
+        return render_template("orderhistory.html",username = session['username'],orderList = orderList['data'])
 
 @app.route("/deliverymanage")
 def deliverymanage(): 
-    return render_template("deliverymanage.html") 
+    deliveryList = requests.get(urlAPI+'api/getDeliveryAll').json()
+    for deli in deliveryList['data']:
+        if deli['updateDate'] != None:
+            updateDate = deli['updateDate'].replace('T',' ')
+        else:
+            updateDate = ''
+        deli['updateDate'] = updateDate
+    if not 'logged_in' in session:
+        return render_template("login.html")
+    else:
+        return render_template("deliverymanage.html",username = session['username'],deliveryList = deliveryList['data'])
 
 @app.route("/promotionmanage")
 def promotionmanage(): 
@@ -471,3 +509,105 @@ def delPromotionId():
         result.error = str(e)
     return jsonify(result.__dict__)
 
+@app.route('/api/getSlipImg')
+def apiGetSlipImg():
+    try:
+        result = apiResult.apiResult()
+        paymentId = request.args.get('paymentId')
+        slip = requests.get(urlAPI+'api/getSlipImg',params={"paymentId":paymentId}).json()
+        result.data = slip['data']
+        result.success = True
+        result.message = "Completed!!"
+    except Exception as e:
+        result.success = False
+        result.message = "Failed!!"
+        result.error = str(e)
+    return jsonify(result.__dict__)
+
+@app.route('/api/cancelPayment',methods=['PUT'])
+def apiCancelPayment():
+    try:
+        result = apiResult.apiResult()
+        paymentId = request.args.get('paymentId')
+        paymentRes = requests.put(urlAPI+'api/cancelPayment',params={"paymentId":paymentId}).json()
+        result.data = paymentRes
+        result.success = True
+        result.message = "Completed!!"
+    except Exception as e:
+        result.success = False
+        result.message = "Failed!!"
+        result.error = str(e)
+    return jsonify(result.__dict__)
+
+
+
+@app.route('/api/recievedPayment',methods=['POST'])
+def apiRecievedPayment():
+    try:
+        result = apiResult.apiResult()
+        if not request.json:
+            abort(400, description="Request Wrong Json Format")
+        paymentId = request.json.get('paymentId')
+        payload = {
+            "paymentId" : paymentId
+        }
+        paymentRes = requests.post(urlAPI+'api/recievedPayment',json=payload).json()
+        result.data = paymentRes
+        result.success = True
+        result.message = "Completed!!"
+    except Exception as e:
+        result.success = False
+        result.message = "Failed!!"
+        result.error = str(e)
+    return jsonify(result.__dict__)
+
+
+@app.route("/invoice")
+def invoice():
+    paymentId = request.args.get('paymentId')
+    _paymentDet = requests.get(urlAPI+'api/getPaymentDetail',params={"paymentId":paymentId}).json()
+    _paymentDet = _paymentDet['data']
+    invoiceDet = paymentModel.invoiceModel()
+    invoiceDet.addressText = _paymentDet[0]['addressText']
+    invoiceDet.subDistrict = _paymentDet[0]['subDistrict']
+    invoiceDet.district = _paymentDet[0]['district']
+    invoiceDet.province = _paymentDet[0]['province']
+    invoiceDet.zipcode = _paymentDet[0]['zipcode']
+    invoiceDet.firstname = _paymentDet[0]['firstName']
+    invoiceDet.lastname = _paymentDet[0]['lastName']
+    invoiceDet.payDate = datetime.strptime(_paymentDet[0]['payDate'],'%Y-%m-%dT%H:%M:%S').strftime('%d/%m/%Y')
+    invoiceDet.paymentId = _paymentDet[0]['paymentId']
+    invoiceDet.totalAmount = _paymentDet[0]['totalAmount']
+    invoiceDet.totalThaiBath =  thaiBath(_paymentDet[0]['totalAmount'])
+    invoiceDet.telNo = _paymentDet[0]['telNo']
+    invoiceDet.discountTotal = _paymentDet[0]['discountTotal']
+    invoiceDet.total = _paymentDet[0]['total']
+    paymentLs = []
+    for payDet in _paymentDet:
+        payDetail = paymentModel.paymentDetail()
+        payDetail.price = payDet['price']
+        payDetail.qty = payDet['qty']
+        payDetail.productName = payDet['productName']
+        paymentLs.append(payDetail)
+    invoiceDet.paymentDetail = paymentLs
+    return render_template("invoice.html",invoiceDet = invoiceDet)
+
+@app.route('/api/delivered',methods=['PUT'])
+def apiDelivered():
+    try:
+        result = apiResult.apiResult()
+        if not request.json:
+            abort(400, description="Request Wrong Json Format")
+        deliveryId = request.json.get('deliveryId')
+        payload = {
+            "deliveryId" : deliveryId
+        }
+        deliveryRes = requests.post(urlAPI+'api/delivered',json=payload).json()
+        result.data = deliveryRes
+        result.success = True
+        result.message = "Completed!!"
+    except Exception as e:
+        result.success = False
+        result.message = "Failed!!"
+        result.error = str(e)
+    return jsonify(result.__dict__)
