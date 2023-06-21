@@ -88,7 +88,7 @@
                                     class="fa fa-truck"></i>&nbsp;ตรวจสอบการส่งสินค้า</a>
                             <a class="nav-link" id="" href="/orderhistory" role="tab"><i
                                     class="fa fa-file"></i>&nbsp;&nbsp;ประวัติการสั่งซื้อ</a>
-                            <a class="Logout nav-link " href="index.html"><i class="fa fa-sign-out-alt"></i>Logout</a>
+                            <a class="Logout nav-link " href="/logout"><i class="fa fa-sign-out-alt"></i>Logout</a>
                         </div>
                     </div>
                 </div>
@@ -115,7 +115,7 @@
                                 {% for order in orderList %}
                                 <tr>
                                     <td class="text-center">
-                                        {% if order.paymentStatus == "PAID" %}
+                                        {% if order.paymentStatus == "PAID" or order.paymentStatus == "DELIVER" %}
                                         <a href="/invoice?paymentId={{order.paymentId}}">
                                             {% endif %}
                                             {{order.paymentId}}</a>
@@ -126,6 +126,7 @@
                                         {% if order.paymentStatus == "PENDING" %} รอชำระเงิน
                                         {% elif order.paymentStatus == "CHECKING" %} รอตรวจสอบ
                                         {% elif order.paymentStatus == "PAID" %} สำเร็จ
+                                        {% elif order.paymentStatus == "DELIVER" %} ชำระปลายทาง
                                         {% else %} ยกเลิก
                                         {% endif %}
                                     </td>

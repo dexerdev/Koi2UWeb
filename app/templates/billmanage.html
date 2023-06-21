@@ -88,7 +88,7 @@
                                     class="fa fa-truck"></i>&nbsp;ตรวจสอบการส่งสินค้า</a>
                             <a class="nav-link" id="" href="/orderhistory" role="tab"><i
                                     class="fa fa-file"></i>&nbsp;&nbsp;ประวัติการสั่งซื้อ</a>
-                            <a class="Logout nav-link " href="index.html"><i class="fa fa-sign-out-alt"></i>Logout</a>
+                            <a class="Logout nav-link " href="/logout"><i class="fa fa-sign-out-alt"></i>Logout</a>
                         </div>
                     </div>
                 </div>
@@ -121,7 +121,7 @@
                                     <td class="text-center">{{loop.index}}</td>
                                     <td class="text-center">{{payment.firstName + " " + payment.lastName}}</td>
                                     <td class="text-center">
-                                        {% if payment.status == "PAID" %}
+                                        {% if payment.status == "PAID" or payment.status == "DELIVER" %}
                                         <a href="/invoice?paymentId={{payment.paymentId}}">
                                             {% endif %}
                                             {{payment.paymentId}}</a>
@@ -133,6 +133,7 @@
                                         {% if payment.status == "PENDING" %} รอชำระเงิน
                                         {% elif payment.status == "CHECKING" %} รอตรวจสอบ
                                         {% elif payment.status == "PAID" %} สำเร็จ
+                                        {% elif payment.status == "DELIVER" %} ชำระปลายทาง
                                         {% else %} ยกเลิก
                                         {% endif %}
                                     </td>

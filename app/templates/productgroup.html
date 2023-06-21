@@ -117,6 +117,7 @@
                                 <tr>
                                     <th class="text-center">#</th>
                                     <th class="text-center">ชื่อกลุ่มสินค้า</th>
+                                    <th class="text-center">สถานะ</th>
                                     <th class="text-center">จำนวนรายการ</th>
                                     <th class="text-center">จัดการสินค้า</th>
                                 </tr>
@@ -127,6 +128,7 @@
 
                                     <td class="text-center">{{loop.index}}</td>
                                     <td class="text-center">{{prodTop.prodGroupName}}</td>
+                                    <td class="text-center">{% if prodTop.activeFlag %} ใช้งาน {% else %} ไม่ใช้งาน {% endif %}</td>
                                     <td class="text-center">{{prodTop.prodCount}}</td>
                                     <td class="text-center">
                                         <!-- <a href="#" class="settings text-warning"><i class="fas fa-cog mr-2"

@@ -454,7 +454,6 @@ def editPromotion():
     return jsonify(result.__dict__)
 
 
-
 @app.route('/api/createPromotion',methods=['POST'])
 def createPromotion():
     try:
@@ -575,7 +574,10 @@ def invoice():
     invoiceDet.zipcode = _paymentDet[0]['zipcode']
     invoiceDet.firstname = _paymentDet[0]['firstName']
     invoiceDet.lastname = _paymentDet[0]['lastName']
-    invoiceDet.payDate = datetime.strptime(_paymentDet[0]['payDate'],'%Y-%m-%dT%H:%M:%S').strftime('%d/%m/%Y')
+    if _paymentDet[0]['payDate'] != None:
+        invoiceDet.payDate = datetime.strptime(_paymentDet[0]['payDate'],'%Y-%m-%dT%H:%M:%S').strftime('%d/%m/%Y')
+    else:
+        invoiceDet.payDate = "ชำระปลายทาง"
     invoiceDet.paymentId = _paymentDet[0]['paymentId']
     invoiceDet.totalAmount = _paymentDet[0]['totalAmount']
     invoiceDet.totalThaiBath =  thaiBath(_paymentDet[0]['totalAmount'])

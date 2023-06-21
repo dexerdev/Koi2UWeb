@@ -88,7 +88,7 @@
                                     class="fa fa-truck"></i>&nbsp;ตรวจสอบการส่งสินค้า</a>
                             <a class="nav-link" id="" href="/orderhistory" role="tab"><i
                                     class="fa fa-file"></i>&nbsp;&nbsp;ประวัติการสั่งซื้อ</a>
-                            <a class="Logout nav-link " href="index.html"><i class="fa fa-sign-out-alt"></i>Logout</a>
+                            <a class="Logout nav-link " href="/logout"><i class="fa fa-sign-out-alt"></i>Logout</a>
                         </div>
                     </div>
                 </div>
@@ -123,7 +123,7 @@
                                     <td class="text-center">{{deli.addressText}} {{deli.subDistrict}} {{deli.district}}
                                         {{deli.province}} {{deli.zipcode}}</td>
                                     <td class="text-center">
-                                        {% if deli.paymentStatus == "PAID" %}
+                                        {% if deli.paymentStatus == "PAID" or deli.paymentStatus == "DELIVER" %}
                                         <a href="/invoice?paymentId={{deli.paymentId}}">
                                             {% endif %}
                                             {{deli.paymentId}}</a>
@@ -131,14 +131,15 @@
                                     <td class="text-center">{{deli.totalAmount}}</td>
                                     <td class="text-center"><span>
                                             {% if deli.status == "PENDING" and deli.paymentStatus == "PAID" %} รอจัดส่ง
-                                            {% elif deli.status == "PENDING" and deli.paymentStatus != "PAID" %}
+                                            {% elif deli.status == "PENDING" and (deli.paymentStatus == "PENDING" or deli.paymentStatus == "CHECKING") %}
                                             รอชำระเงิน
+                                            {% elif deli.status == "PENDING" and deli.paymentStatus == "DELIVER" %} ชำระปลายทาง
                                             {% elif deli.status == "DELIVERED" %} จัดส่งแล้ว
                                             {% else %} ยกเลิก
                                             {% endif %}
                                         </span></td>
                                     <td class="text-center">
-                                        {% if deli.status == "PENDING" and deli.paymentStatus == "PAID" %}
+                                        {% if deli.status == "PENDING" and (deli.paymentStatus == "PAID" or deli.paymentStatus == "DELIVER" )%}
                                         <a href="#" class="settings text-success" title="Settings"
                                             onclick="delivered('{{deli.deliveryId}}')">
                                             <i class="fas fa-check"></i></a>

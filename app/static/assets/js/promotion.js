@@ -2,7 +2,6 @@ function getPromotionId(promoId){
     var url = '/api/getPromotionId?promoId=' + promoId;
     fetch(url).then(response => response.json()).then((json) => {
         if (json.success) {
-            console.log(json);
             document.getElementById("editPromoCode").value = json.data.promoCode;
             document.getElementById("editPromoDescription").value = json.data.promoDescription;
             document.getElementById("editStartDate").value = json.data.startDate;
@@ -126,6 +125,49 @@ function createPromotion(){
             'promo code cannot be empty',
             'error'
         );
+        return
+    }
+
+    if (startDate === "") {
+        Swal.fire(
+            'Start Date',
+            'Start Date cannot be empty',
+            'error'
+        );
+        return
+    }
+    if (endDate === "") {
+        Swal.fire(
+            'End Date',
+            'End Date cannot be empty',
+            'error'
+        );
+        return
+    }
+    if (targetAmount === "") {
+        Swal.fire(
+            'targetAmount',
+            'targetAmount cannot be empty',
+            'error'
+        );
+        return
+    }
+    if (discount === "") {
+        Swal.fire(
+            'discount',
+            'discount cannot be empty',
+            'error'
+        );
+        return
+    }
+
+    if (limitCode === "") {
+        Swal.fire(
+            'limitCode',
+            'limitCode cannot be empty',
+            'error'
+        );
+        return
     }
 
     if (activeFlag == "Active") {

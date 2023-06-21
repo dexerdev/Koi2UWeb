@@ -194,6 +194,8 @@ function getProductGroupId(prodGroupId) {
                 priceCell.innerHTML = product.price;
                 var actionCell = row.insertCell(4);
                 actionCell.innerHTML = "<button class='btn btn-danger btn-sm'>ลบ</button>";
+                // actionCell.innerHTML = "<i class='fas fa-trash-alt text-danger'></i>";
+
             }
             document.getElementById("btnEditProductGroup").setAttribute('onclick', 'editProductGroup(' + json.data.prodGroupId + ')');
             $("#editProductGroupModal").modal("show");
