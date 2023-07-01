@@ -613,3 +613,7 @@ def apiDelivered():
         result.message = "Failed!!"
         result.error = str(e)
     return jsonify(result.__dict__)
+
+@app.route('/privacy')
+def privacy():
+    return render_template("privacy.html")
