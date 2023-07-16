@@ -214,6 +214,51 @@ function createProduct() {
     var categoryId = document.getElementById("category").value;
     var productQty = document.getElementById("productQty").value;
     var productUnit = document.getElementById("productUnit").value;
+    var isNumeric = !isNaN(parseFloat(productPrice)) && isFinite(productPrice);
+    debugger;
+    
+    if (productName === "") {
+        Swal.fire(
+            'ProductName',
+            'ProductName cannot be empty',
+            'error'
+        );
+        return
+    }
+    if (productPrice === "") {
+        Swal.fire(
+            'ProductPrice',
+            'ProductPrice cannot be empty',
+            'error'
+        );
+        return
+    }
+    if (!isNumeric) {
+        Swal.fire(
+            'ProductPrice',
+            'The value is numeric.',
+            'error'
+        );
+        return
+    } 
+    if (productQty === "") {
+        Swal.fire(
+            'Product Qty',
+            'productQty cannot be empty',
+            'error'
+        );
+        return
+    }
+    if (categoryId === "เลือกประเภท") {
+        Swal.fire(
+            'Category',
+            'Please Select Category',
+            'error'
+        );
+        return
+    }
+    
+
     var date = new Date();
     var day = date.getDate();
     var month = date.getMonth() + 1;
@@ -459,7 +504,7 @@ function loadEditImages(imagesfile) {
         //         var reader = new FileReader();
         //         reader.readAsDataURL(blob);
         //         reader.onloadend = function () {
-                    
+
         //         }
         //     });
     });
@@ -514,7 +559,7 @@ function EditImgUpload() {
                             console.log(imgArrayEdit);
                             // formData.append('productImages', f);
                             var reader = new FileReader();
-                            
+
                             reader.onload = function (e) {
                                 var html = "<div class='upload_edit_img-box'><div style='background-image: url(" + e.target.result + ")' data-number='" + $(".upload_edit_img-close").length + "' data-file='" + f.name + "' class='img-bg'><div class='upload_edit_img-close'></div></div></div>";
                                 editImgWrap.append(html);

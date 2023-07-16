@@ -3,7 +3,7 @@ services:
   api:
     build: .
     platform: linux/amd64
-    image: "registry.gitlab.com/armuro.rey.dev/container-registry/koi-web:1.1.1"
+    image: "registry.gitlab.com/armuro.rey.dev/container-registry/koi-web:1.2.0"
     container_name: koi-web
     network_mode: bridge
     ports:

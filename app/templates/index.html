@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>E Store - eCommerce </title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="eCommerce" name="keywords">
+    <meta content="eCommerce" name="description">
+
+    <!-- Favicon -->
+    <!-- <link href="/static/assets/img/favicon.ico" rel="icon"> -->
+
+    <!-- Google Fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Mitr' rel='stylesheet'>
+    <!-- CSS Libraries -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <!-- <link href="/static/assets/lib/slick/slick.css" rel="stylesheet"> -->
+    <!-- <link href="/static/assets/lib/slick/slick-theme.css" rel="stylesheet"> -->
+    <link href="/static/assets/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+    <style>
+        body {
+            background-color: #f0f0f0;
+        }
+
+        .centered-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 70vh;
+        }
+    </style>
+    <!-- Template Stylesheet -->
+</head>
+
+<body>
+
+    <!-- Nav Bar Start -->
+    <div class="nav">
+        <div class="container-fluid">
+            <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+                <a href="#" class="navbar-brand">MENU</a>
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                    <div class="navbar-nav ml-auto">
+                        <div class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">{{username}}</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <!-- Nav Bar End -->
+
+    <!-- productmanage Start -->
+    <div class="my-account">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="nav flex-column nav-pills" role="tablist" aria-orientation="vertical">
+                        <div class="nav flex-column nav-pills" role="tablist" aria-orientation="vertical">
+                            <div class="head-manage text-center">
+                                <h2>การจัดการข้อมูล</h2>
+                            </div>
+                            <a class="nav-link" id="" href="/productmanage" role="tab"><i
+                                    class="fa fa-shopping-bag"></i>&nbsp;&nbsp;การจัดการสินค้า</a>
+                            <a class="nav-link" id="" href="/productgroup" role="tab"><i
+                                    class="fa fa-shopping-bag"></i>&nbsp;&nbsp;การจัดการกลุ่มสินค้า</a>
+                            <a class="nav-link" id="" href="/promotionmanage" role="tab">
+                                <i class="fas fa-gift"></i>&nbsp;&nbsp;การจัดโปรโมชัน</a>
+                            <a class="nav-link" id="" href="/usermanage" role="tab"><i
+                                    class="fa fa-user"></i>&nbsp;&nbsp;การจัดการสมาชิก</a>
+                            <a class="nav-link" id="" href="/billmanage" role="tab"><i
+                                    class="fa fa-shopping-cart"></i>&nbsp;ตรวจสอบการสั่งสินค้า</a>
+                            <a class="nav-link" id="" href="/deliverymanage" role="tab"><i
+                                    class="fa fa-truck"></i>&nbsp;ตรวจสอบการส่งสินค้า</a>
+                            <a class="nav-link" id="" href="/orderhistory" role="tab"><i
+                                    class="fa fa-file"></i>&nbsp;&nbsp;ประวัติการสั่งซื้อ</a>
+                            <a class="Logout nav-link " href="/logout"><i class="fa fa-sign-out-alt"></i>Logout</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="tab-content">
+                        <div class="tab-pane fade show active" id="productmanage" role="tabpanel"
+                            aria-labelledby="productmanage-nav">
+                            <div class="text-center">
+                                <h2>ระบบการจัดการ - Koi2UShop</h2>
+                            </div>
+                            <div class="centered-image">
+                                <img src="static/img/feature_graphic.png" alt="Centered Image" class="img-fluid">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- productmanage End -->
+
+
+
+
+
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="static/assets/js/session.js"></script>
+</body>
+
+</html>

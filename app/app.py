@@ -26,9 +26,7 @@ def home():
     if not 'logged_in' in session:
         return render_template("login.html")
     else:
-        categoryLs = requests.get(urlAPI+'api/getCategory').json()
-        productLs = requests.get(urlAPI+'api/getProductAll').json()
-        return render_template("productmanage.html",categoryLs=categoryLs['data'],productLs=productLs['data'],username = session['username'])
+        return render_template("index.html",username = session['username'])
 
 @app.route('/checkSession')
 def checkSession():
@@ -617,3 +615,12 @@ def apiDelivered():
 @app.route('/privacy')
 def privacy():
     return render_template("privacy.html")
+
+
+# @app.route('/login_screen')
+# def login_screen():
+#     return render_template("login_screen.html")
+
+# @app.route('/register_screen')
+# def register_screen():
+#     return render_template("register_screen.html")
