@@ -33,3 +33,40 @@ function delivered(deliveryId){
         }
     });
 }
+
+function backwardDeliver(deliveryId){
+    var url = '/api/backwardDeliver';
+
+    var json = JSON.stringify({
+        "deliveryId": deliveryId
+    });
+
+    fetch(url, {
+        method: 'PUT',
+        body: json,
+        headers: {
+            "Content-type": "application/json; charset=UTF-8"
+        }
+    }).then(response => response.json()).then((json) => {
+        if (json.success) {
+            Swal.fire({
+                title: 'ย้อนกลับการจัดส่งเรียบร้อย',
+                icon: 'success',
+                showconfirmbutton: true,
+                allowoutsideclick: false,
+                allowescapekey: false
+            }).then(function () {
+                //console.log(json.data);
+                window.location.href = "/deliverymanage";
+            });
+        }
+        else {
+            Swal.fire(
+                'ย้อนกลับการจัดส่งไม่สำเร็จ',
+                '',
+                'error'
+            );
+        }
+    });
+}
+

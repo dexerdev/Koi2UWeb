@@ -131,18 +131,25 @@
                                     <td class="text-center">{{deli.totalAmount}}</td>
                                     <td class="text-center"><span>
                                             {% if deli.status == "PENDING" and deli.paymentStatus == "PAID" %} รอจัดส่ง
-                                            {% elif deli.status == "PENDING" and (deli.paymentStatus == "PENDING" or deli.paymentStatus == "CHECKING") %}
+                                            {% elif deli.status == "PENDING" and (deli.paymentStatus == "PENDING" or
+                                            deli.paymentStatus == "CHECKING") %}
                                             รอชำระเงิน
-                                            {% elif deli.status == "PENDING" and deli.paymentStatus == "DELIVER" %} ชำระปลายทาง
+                                            {% elif deli.status == "PENDING" and deli.paymentStatus == "DELIVER" %}
+                                            ชำระปลายทาง
                                             {% elif deli.status == "DELIVERED" %} จัดส่งแล้ว
                                             {% else %} ยกเลิก
                                             {% endif %}
                                         </span></td>
                                     <td class="text-center">
-                                        {% if deli.status == "PENDING" and (deli.paymentStatus == "PAID" or deli.paymentStatus == "DELIVER" )%}
+                                        {% if deli.status == "PENDING" and (deli.paymentStatus == "PAID" or
+                                        deli.paymentStatus == "DELIVER" )%}
                                         <a href="#" class="settings text-success" title="Settings"
                                             onclick="delivered('{{deli.deliveryId}}')">
                                             <i class="fas fa-check"></i></a>
+                                        {% elif deli.status == "DELIVERED" %}
+                                        <a href="#" class="settings text-danger" title="Settings"
+                                            onclick="backwardDeliver('{{deli.deliveryId}}')">
+                                            <i class="fas fa-backward"></i>
                                         {% endif %}
                                     </td>
                                 </tr>

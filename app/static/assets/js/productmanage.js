@@ -125,27 +125,27 @@ function editImageUploaded() {
 //     });
 // }
 
-// function getProduct(productId) {
-//     var url = '/api/getProduct?productId=' + productId;
-//     fetch(url).then(response => response.json()).then((json) => {
-//         if (json.success) {
-//             document.getElementById("editCategory").value = json.data.categoryId;
-//             document.getElementById("editProductName").value = json.data.productName;
-//             document.getElementById("editProductPrice").value = json.data.price;
-//             document.getElementById("editProductDetail").value = json.data.productDetail;
-//             document.getElementById("showProductImage").src = 'data:image/png;base64,' + json.data.imageBase64;
-//             document.getElementById("btnEditProduct").setAttribute('onclick', 'editProduct(' + productId + ')');
-//             $("#editProductModal").modal("show");
-//         }
-//         else {
-//             Swal.fire(
-//                 'ไม่พบสินค้า',
-//                 '',
-//                 'error'
-//             );
-//         }
-//     });
-// }
+function getProduct(productId) {
+    var url = '/api/getProduct?productId=' + productId;
+    fetch(url).then(response => response.json()).then((json) => {
+        if (json.success) {
+            document.getElementById("editCategory").value = json.data.categoryId;
+            document.getElementById("editProductName").value = json.data.productName;
+            document.getElementById("editProductPrice").value = json.data.price;
+            document.getElementById("editProductDetail").value = json.data.productDetail;
+            document.getElementById("showProductImage").src = 'data:image/png;base64,' + json.data.imageBase64;
+            document.getElementById("btnEditProduct").setAttribute('onclick', 'editProduct(' + productId + ')');
+            $("#editProductModal").modal("show");
+        }
+        else {
+            Swal.fire(
+                'ไม่พบสินค้า',
+                '',
+                'error'
+            );
+        }
+    });
+}
 
 // function editProduct(productId) {
 //     var url = '/api/editProduct';

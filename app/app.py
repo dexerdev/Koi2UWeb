@@ -602,7 +602,7 @@ def apiDelivered():
         payload = {
             "deliveryId" : deliveryId
         }
-        deliveryRes = requests.post(urlAPI+'api/delivered',json=payload).json()
+        deliveryRes = requests.put(urlAPI+'api/delivered',json=payload).json()
         result.data = deliveryRes
         result.success = True
         result.message = "Completed!!"
@@ -616,7 +616,25 @@ def apiDelivered():
 def privacy():
     return render_template("privacy.html")
 
-
+@app.route('/api/backwardDeliver',methods=['PUT'])
+def apiBackwardDeliver():
+    try:
+        result = apiResult.apiResult()
+        if not request.json:
+            abort(400, description="Request Wrong Json Format")
+        deliveryId = request.json.get('deliveryId')
+        payload = {
+            "deliveryId" : deliveryId
+        }
+        deliveryRes = requests.put(urlAPI+'api/backwardDeliver',json=payload).json()
+        result.data = deliveryRes
+        result.success = True
+        result.message = "Completed!!"
+    except Exception as e:
+        result.success = False
+        result.message = "Failed!!"
+        result.error = str(e)
+    return jsonify(result.__dict__)
 # @app.route('/login_screen')
 # def login_screen():
 #     return render_template("login_screen.html")
