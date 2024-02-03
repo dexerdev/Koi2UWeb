@@ -22,7 +22,7 @@ class paymentDetail:
 class invoiceModel:
     def __init__(self,firstname = None, lastname = None, addressText= None, paymentId = None, payDate = None,\
         totalAmount =None, paymentDetail=None , totalThaiBath = None, subDistrict = None,district = None,\
-        province = None,zipcode = None,telNo = None,discountTotal=None, total = None):
+        province = None,zipcode = None,telNo = None,discountTotal=None, total = None,deliveryFee =None):
         self.firstname = firstname 
         self.lastname = lastname 
         self.addressText= addressText
@@ -38,3 +38,5 @@ class invoiceModel:
         self.telNo = telNo
         self.discountTotal = discountTotal
         self.total = total
+        self.deliveryFee = deliveryFee
+        

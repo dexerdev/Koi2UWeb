@@ -79,6 +79,7 @@ $(document).on('click', '#tableEditProductGroupDetail .btn-danger', function () 
 /// new 
 let stopFlag = false;
 function createProductGroup() {
+    debugger;
     var prodGrouptName = document.getElementById("productGroupName").value;
     var activeFlag = document.getElementById("activeFlag").value;
     var tableProductGroupDetail = document.getElementById("tableProductGroupDetail");

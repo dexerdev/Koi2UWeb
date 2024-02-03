@@ -147,9 +147,12 @@
                                             onclick="delivered('{{deli.deliveryId}}')">
                                             <i class="fas fa-check"></i></a>
                                         {% elif deli.status == "DELIVERED" %}
+                                        <a href="#" class="settings text-info" title="Settings"
+                                            onclick="getTracking('{{deli.deliveryId}}')">
+                                            <i class="fas fa-edit"></i></a>
                                         <a href="#" class="settings text-danger" title="Settings"
                                             onclick="backwardDeliver('{{deli.deliveryId}}')">
-                                            <i class="fas fa-backward"></i>
+                                            <i class="fas fa-backward"></i></a>
                                         {% endif %}
                                     </td>
                                 </tr>
@@ -178,7 +181,54 @@
     </div>
     <!-- My Account End -->
 
+    <!--Start Modal Tracking-->
+    <div class="modal fade" id="addTracking" tabindex="-1" role="dialog" aria-labelledby="addTrackingTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addTrackingTitle">ข้อมูลพัสดุ</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Edit Product Start -->
+                    <div class="container-fluid mt-2">
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <span class="ml-1">Tracking No.</span>
+                                            <input type="text" id="TrackingNo" class="form-control">
+                                        </div>
+                                        <div class="col-6">
+                                            <span class="ml-1">บริษัทขนส่ง</span>
+                                            <input type="text" id="TrackComp" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <span class="ml-1">Tracking URL</span>
+                                            <input type="text" id="TrackURL" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
+                    <!-- Edit Product End -->
+                </div>
+                <div class="modal-footer ">
+                    <button type="button" class="col-md-2 btn btn-secondary" data-dismiss="modal">ปิด</button>
+                    <button type="button" id="btnUpdateTrack" class="col-md-2 btn btn-primary">บันทึก</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--End Modal Add Product -->
 
     <!-- Back to Top -->
     <!-- <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a> -->

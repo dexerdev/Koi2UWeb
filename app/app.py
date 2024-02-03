@@ -175,11 +175,17 @@ def checkLogin():
 def createCategory():
     try:
         result = apiResult.apiResult()
-        categoryName = request.json.get('categoryName')
-        createDate = request.json.get('createDate')
+        categoryData = request.form
         createBy = session['username']
-        payload = {"categoryName":categoryName,"createDate":createDate,"createBy":createBy}
-        cate = requests.post(urlAPI+'api/createCategory',json=payload).json()
+        payload={'categoryName': categoryData['categoryName'],
+                'createDate': categoryData['createDate'],
+                'createBy': createBy,
+                'seqno': categoryData['seqno']
+                }
+        files = []
+        for file in request.files.getlist('categoryIcon'):
+            files.append(('categoryIcon', (file.filename, file.read(), file.content_type)))
+        cate = requests.request("POST", urlAPI+'api/createCategory',data=payload,files=files).json()
         result.data = cate
         result.success = True
         result.message = "Completed!!"
@@ -582,6 +588,7 @@ def invoice():
     invoiceDet.telNo = _paymentDet[0]['telNo']
     invoiceDet.discountTotal = _paymentDet[0]['discountTotal']
     invoiceDet.total = _paymentDet[0]['total']
+    invoiceDet.deliveryFee = _paymentDet[0]['deliveryFee']
     paymentLs = []
     for payDet in _paymentDet:
         payDetail = paymentModel.paymentDetail()
@@ -635,6 +642,85 @@ def apiBackwardDeliver():
         result.message = "Failed!!"
         result.error = str(e)
     return jsonify(result.__dict__)
+
+@app.route('/api/getDeliveryId')
+def getDeliveryId():
+    try:
+        result = apiResult.apiResult()
+        deliveryId = request.args.get('deliveryId')
+        delivery = requests.get(urlAPI+'api/getDeliveryId',params={"deliveryId":deliveryId}).json()
+        result.data = delivery['data']
+        result.success = True
+        result.message = "Completed!!"
+    except Exception as e:
+        result.success = False
+        result.message = "Failed!!"
+        result.error = str(e)
+    return jsonify(result.__dict__)
+
+
+@app.route('/api/updateTracking',methods=['PUT'])
+def updateTracking():
+    try:
+        result = apiResult.apiResult()
+        if not request.json:
+            abort(400, description="Request Wrong Json Format")
+        deliveryId = request.json.get('deliveryId')
+        trackingNo = request.json.get('trackingNo')
+        trackComp = request.json.get('trackComp')
+        trackURL = request.json.get('trackURL')
+        payload = {
+            "deliveryId" : deliveryId,
+            "trackingNo":trackingNo,
+            "trackComp":trackComp,
+            "trackURL":trackURL
+        }
+        deliveryRes = requests.put(urlAPI+'api/updateDeliveryTrack',json=payload).json()
+        result.data = deliveryRes
+        result.success = True
+        result.message = "Completed!!"
+    except Exception as e:
+        result.success = False
+        result.message = "Failed!!"
+        result.error = str(e)
+    return jsonify(result.__dict__)
+
+@app.route('/api/getCategoryId')
+def getCategoryId():
+    try:
+        result = apiResult.apiResult()
+        categoryId = request.args.get('categoryId')
+        category = requests.get(urlAPI+'api/getCategoryId',params={"categoryId":categoryId}).json()
+        result.data = category['data']
+        result.success = True
+        result.message = "Completed!!"
+    except Exception as e:
+        result.success = False
+        result.message = "Failed!!"
+        result.error = str(e)
+    return jsonify(result.__dict__)
+
+@app.route('/api/editCategory',methods=['PUT'])
+def editCategory():
+    try:
+        result = apiResult.apiResult()
+        categoryData = request.form
+        payload={'categoryId':categoryData['categoryId'],
+                'categoryName': categoryData['categoryName'],
+                'seqno': categoryData['seqno']}
+        files = []
+        for file in request.files.getlist('categoryIcon'):
+            files.append(('categoryIcon', (file.filename, file.read(), file.content_type)))
+        response = requests.request("PUT", urlAPI+'api/editCategory',data=payload,files=files).json()
+        result.data = response
+        result.success = True
+        result.message = "Completed!!"
+    except Exception as e:
+        result.success = False
+        result.message = "Failed!!"
+        result.error = str(e)
+    return jsonify(result.__dict__)
+
 # @app.route('/login_screen')
 # def login_screen():
 #     return render_template("login_screen.html")

@@ -73,136 +73,6 @@ function editImageUploaded() {
 }
 
 
-// function createProduct() {
-//     var productName = document.getElementById("productName").value;
-//     var productDetail = document.getElementById("productDetail").value;
-//     var productPrice = document.getElementById("productPrice").value;
-//     var categoryId = document.getElementById("category").value;
-//     var date = new Date();
-//     var day = date.getDate();
-//     var month = date.getMonth() + 1;
-//     var year = date.getFullYear();
-//     if (month < 10) month = "0" + month;
-//     if (day < 10) day = "0" + day;
-//     var today = year + "-" + month + "-" + day;
-//     var userId = getCookie('userId');
-
-//     var json = JSON.stringify({
-//         "productName": productName,
-//         "productDetail": productDetail,
-//         "price": productPrice,
-//         "categoryId": categoryId,
-//         "imageBase64": base64String,
-//         "createDate": today,
-//         "createBy": userId
-//     });
-//     fetch("/api/createProduct", {
-//         method: 'POST',
-//         body: json,
-//         headers: {
-//             "Content-type": "application/json; charset=UTF-8"
-//         }
-//     }).then(response => response.json()).then((json) => {
-//         if (json.success) {
-//             Swal.fire({
-//                 title: 'เพิ่มรายสินค้าเรียบร้อย',
-//                 icon: 'success',
-//                 showconfirmbutton: true,
-//                 allowoutsideclick: false,
-//                 allowescapekey: false
-//             }).then(function () {
-//                 //console.log(json.data);
-//                 window.location.href = "/productmanage";
-//             });
-//         }
-//         else {
-//             Swal.fire(
-//                 'เพิ่มสินค้าไม่สำเร็จ',
-//                 '',
-//                 'error'
-//             );
-//         }
-//     });
-// }
-
-function getProduct(productId) {
-    var url = '/api/getProduct?productId=' + productId;
-    fetch(url).then(response => response.json()).then((json) => {
-        if (json.success) {
-            document.getElementById("editCategory").value = json.data.categoryId;
-            document.getElementById("editProductName").value = json.data.productName;
-            document.getElementById("editProductPrice").value = json.data.price;
-            document.getElementById("editProductDetail").value = json.data.productDetail;
-            document.getElementById("showProductImage").src = 'data:image/png;base64,' + json.data.imageBase64;
-            document.getElementById("btnEditProduct").setAttribute('onclick', 'editProduct(' + productId + ')');
-            $("#editProductModal").modal("show");
-        }
-        else {
-            Swal.fire(
-                'ไม่พบสินค้า',
-                '',
-                'error'
-            );
-        }
-    });
-}
-
-// function editProduct(productId) {
-//     var url = '/api/editProduct';
-//     var date = new Date();
-//     var day = date.getDate();
-//     var month = date.getMonth() + 1;
-//     var year = date.getFullYear();
-//     if (month < 10) month = "0" + month;
-//     if (day < 10) day = "0" + day;
-//     var today = year + "-" + month + "-" + day;
-//     var userId = getCookie('userId');
-//     var productName = document.getElementById("editProductName").value;
-//     var productDetail = document.getElementById("editProductDetail").value;
-//     var productPrice = document.getElementById("editProductPrice").value;
-//     var categoryId = document.getElementById("editCategory").value;
-
-//     var json = JSON.stringify({
-//         "productId": productId,
-//         "productName": productName,
-//         "productDetail": productDetail,
-//         "price": productPrice,
-//         "categoryId": categoryId,
-//         "imageBase64": base64String,
-//         "createDate": today,
-//         "createBy": userId
-//     });
-
-//     fetch(url, {
-//         method: 'PUT',
-//         body: json,
-//         headers: {
-//             "Content-type": "application/json; charset=UTF-8"
-//         }
-//     }).then(response => response.json()).then((json) => {
-//         if (json.success) {
-//             Swal.fire({
-//                 title: 'แก้ไขรายสินค้าเรียบร้อย',
-//                 icon: 'success',
-//                 showconfirmbutton: true,
-//                 allowoutsideclick: false,
-//                 allowescapekey: false
-//             }).then(function () {
-//                 //console.log(json.data);
-//                 window.location.href = "/productmanage";
-//             });
-//         }
-//         else {
-//             Swal.fire(
-//                 'แก้ไขสินค้าไม่สำเร็จ',
-//                 '',
-//                 'error'
-//             );
-//         }
-//     });
-// }
-
-
 
 
 /// new 
@@ -215,8 +85,7 @@ function createProduct() {
     var productQty = document.getElementById("productQty").value;
     var productUnit = document.getElementById("productUnit").value;
     var isNumeric = !isNaN(parseFloat(productPrice)) && isFinite(productPrice);
-    debugger;
-    
+
     if (productName === "") {
         Swal.fire(
             'ProductName',
@@ -240,7 +109,7 @@ function createProduct() {
             'error'
         );
         return
-    } 
+    }
     if (productQty === "") {
         Swal.fire(
             'Product Qty',
@@ -257,7 +126,7 @@ function createProduct() {
         );
         return
     }
-    
+
 
     var date = new Date();
     var day = date.getDate();
@@ -310,6 +179,7 @@ function createProduct() {
 
 function createCategory() {
     var categoryName = document.getElementById("categoryName").value;
+    var seqno = document.getElementById("seqno").value;
     var date = new Date();
     var day = date.getDate();
     var month = date.getMonth() + 1;
@@ -319,18 +189,26 @@ function createCategory() {
     var today = year + "-" + month + "-" + day;
     // var userId = getCookie('userId');
 
-    var json = JSON.stringify({
-        "categoryName": categoryName,
-        "createDate": today,
-        // "createBy": userId
-    });
-    fetch("/api/createCategory", {
+    var formData = new FormData();
+    for (var i = 0; i < imgIconArray.length; i++) {
+        formData.append("categoryIcon", imgIconArray[i]);
+    }
+    formData.append("categoryName", categoryName);
+    formData.append("createDate", today);
+    // formData.append("createBy", userId);
+    formData.append("seqno", seqno);
+    var requestOptions = {
         method: 'POST',
-        body: json,
-        headers: {
-            "Content-type": "application/json; charset=UTF-8"
-        }
-    }).then(response => response.json()).then((json) => {
+        body: formData,
+        redirect: 'follow'
+    };
+
+    // var json = JSON.stringify({
+    //     "categoryName": categoryName,
+    //     "createDate": today,
+    //     // "createBy": userId
+    // });
+    fetch("/api/createCategory", requestOptions).then(response => response.json()).then((json) => {
         if (json.success) {
             Swal.fire({
                 title: 'เพิ่มประเภทสินค้าเรียบร้อย',
@@ -398,14 +276,14 @@ function delCategory(categoryId) {
 
 jQuery(document).ready(function () {
     ImgUpload();
-
+    ImgIconUpload();
 });
 var imgArray = [];
 var imgArrayEdit = [];
+var imgIconArray = [];
+var imgIconArrayEdit = [];
 function ImgUpload() {
     var imgWrap = "";
-
-
     $('.upload__inputfile').each(function () {
         $(this).on('change', function (e) {
             imgWrap = $(this).closest('.upload__box').find('.upload__img-wrap');
@@ -464,7 +342,6 @@ function getProduct(productId) {
     var url = '/api/getProduct?productId=' + productId;
     fetch(url).then(response => response.json()).then((json) => {
         if (json.success) {
-            // console.log(json.data);
             document.getElementById("editCategory").value = json.data.categoryId;
             document.getElementById("editProductName").value = json.data.productName;
             document.getElementById("editProductPrice").value = json.data.price;
@@ -514,6 +391,18 @@ function editImageClose(prodImgId) {
     for (var i = 0; i < imgArrayEdit.length; i++) {
         if (imgArrayEdit[i].prodImgId === prodImgId) {
             imgArrayEdit.splice(i, 1);
+            break;
+        }
+    }
+    // console.log(imgArrayEdit);
+    // $(".upload_edit_img-close").parent().parent().remove();
+}
+
+function editIconClose(prodImgId) {
+    // var file = $(".upload_edit_img-close");
+    for (var i = 0; i < imgIconArrayEdit.length; i++) {
+        if (imgIconArrayEdit[i].prodImgId === prodImgId) {
+            imgIconArrayEdit.splice(i, 1);
             break;
         }
     }
@@ -633,7 +522,7 @@ function editProduct(productId) {
     fetch(url, requestOptions).then(response => response.json()).then((json) => {
         if (json.success) {
             Swal.fire({
-                title: 'แก้ไขรายสินค้าเรียบร้อย',
+                title: 'แก้ไขรายสินค้ารียบร้อย',
                 icon: 'success',
                 showconfirmbutton: true,
                 allowoutsideclick: false,
@@ -692,4 +581,216 @@ function delProduct(productId) {
             });
         }
     })
+}
+
+
+function ImgIconUpload() {
+    var imgWrap = "";
+    $('.upload__inputfile_icon').each(function () {
+        $(this).on('change', function (e) {
+            imgWrap = $(this).closest('.upload__box_icon').find('.upload__img-wrap_icon');
+            var maxLength = $(this).attr('data-max_length_icon');
+
+            var files = e.target.files;
+            var filesArr = Array.prototype.slice.call(files);
+            var iterator = 0;
+            filesArr.forEach(function (f, index) {
+                if (!f.type.match('image.*')) {
+                    return;
+                }
+
+                if (imgIconArray.length > maxLength) {
+                    return false
+                } else {
+                    var len = 0;
+                    for (var i = 0; i < imgIconArray.length; i++) {
+                        if (imgIconArray[i] !== undefined) {
+                            len++;
+                        }
+                    }
+                    if (len > maxLength) {
+                        return false;
+                    } else {
+                        imgIconArray.push(f);
+                        // console.log(f)
+                        // formData.append('productImages', f);
+                        var reader = new FileReader();
+                        reader.onload = function (e) {
+                            var html = "<div class='upload__img-box_icon'><div style='background-image: url(" + e.target.result + ")' data-number='" + $(".upload__img-close_icon").length + "' data-file='" + f.name + "' class='img-bg'><div class='upload__img-close_icon'></div></div></div>";
+                            imgWrap.append(html);
+                            iterator++;
+                        }
+                        reader.readAsDataURL(f);
+                    }
+                }
+            });
+        });
+    });
+
+    $('body').on('click', ".upload__img-close_icon", function (e) {
+        var file = $(this).parent().data("file");
+        for (var i = 0; i < imgIconArray.length; i++) {
+            if (imgIconArray[i].name === file) {
+                imgIconArray.splice(i, 1);
+                break;
+            }
+        }
+        $(this).parent().parent().remove();
+    });
+}
+var imgIconOldHave = false;
+
+function getCategory(categoryId) {
+    EditIconUpload()
+    var url = '/api/getCategoryId?categoryId=' + categoryId;
+    fetch(url).then(response => response.json()).then((data) => {
+        debugger;
+        if (data.success) {
+            document.getElementById("editSeqno").value = data.data.seqno;
+            document.getElementById("editCategoryName").value = data.data.categoryName;
+            // document.getElementById("showProductImage").src = 'data:image/png;base64,' + json.data.imageBase64;
+            var imgWraps = document.querySelectorAll('.upload_edit_img-wrap_icon');
+            imgWraps.forEach(imgWrap => {
+                imgWrap.innerHTML = '';
+            });
+            if (data.data.thumbnail != null) {
+                var html = "<div class='upload_edit_img-box_icon'><div style='background-image: url(data:image/png;base64," + data.data.thumbnail + ")' onclick='editIconClose(" + data.data.categoryId + ")' data-number='" + $(".upload_edit_img-close_icon").length + "' data-file='oldicon-" + categoryId + "' class='img-bg'><div class='upload_edit_img-close_icon'></div></div></div>";
+                imgWraps.forEach(imgWrap => {
+                    imgWrap.innerHTML += html;
+                });
+                imgIconOldHave = true;
+            }
+            else {
+                imgIconOldHave = false;
+            }
+
+            document.getElementById("btnEditCategory").setAttribute('onclick', 'editCategory(' + categoryId + ')');
+            $("#editCategory").modal("show");
+        }
+        else {
+            Swal.fire(
+                'ไม่พบรายการ',
+                '',
+                'error'
+            );
+        }
+    })
+}
+
+function EditIconUpload() {
+    var editImgWrap = "";
+    var stopFlag = false;
+    document.getElementById('upload_edit_inputfile_icon').value = "";
+    $('.upload_edit_inputfile_icon').each(function () {
+        if (stopFlag) {
+            return false;
+        }
+        else {
+            // console.log($(this));
+            $(this).on('change', function (e) {
+                editImgWrap = $(this).closest('.upload_edit_box_icon').find('.upload_edit_img-wrap_icon');
+                var maxLength = $(this).attr('data-max_length_icon');
+                // console.log(editImgWrap);
+                var files = e.target.files;
+                // console.log(files);
+                var filesArr = Array.prototype.slice.call(files);
+                var iterator = 0;
+                filesArr.forEach(function (f, index) {
+                    if (!f.type.match('image.*')) {
+                        return;
+                    }
+                    // console.log(f);
+                    if (imgIconArrayEdit.length > maxLength) {
+                        return false
+                    } else {
+                        var len = 0;
+                        for (var i = 0; i < imgIconArrayEdit.length; i++) {
+                            if (imgIconArrayEdit[i] !== undefined) {
+                                len++;
+                            }
+                        }
+                        if (len > maxLength) {
+                            return false;
+                        } else {
+                            if (imgIconOldHave) {
+                                Swal.fire({
+                                    title: "ไม่สามารถเพิ่ม icon ได้",
+                                    text: "กรุณาลบ icon เก่าก่อน",
+                                    icon: 'error'
+                                });
+                                return false;
+                            }
+                            else {
+                                imgIconArrayEdit.push(f);
+                                // formData.append('productImages', f);
+                                var reader = new FileReader();
+                                reader.onload = function (e) {
+                                    var html = "<div class='upload_edit_img-box_icon'><div style='background-image: url(" + e.target.result + ")' data-number='" + $(".upload_edit_img-close_icon").length + "' data-file='" + f.name + "' class='img-bg'><div class='upload_edit_img-close_icon'></div></div></div>";
+                                    editImgWrap.append(html);
+                                    iterator++;
+                                }
+                                reader.readAsDataURL(f);
+                                document.getElementById('upload_edit_inputfile_icon').value = "";
+                                stopFlag = true;
+                            }
+                        }
+                    }
+                });
+            });
+        }
+    });
+
+    $('body').on('click', ".upload_edit_img-close_icon", function (e) {
+        var file = $(this).parent().data("file");
+        if (file.includes('oldicon-')) {
+            imgIconOldHave = false;
+        }
+        for (var i = 0; i < imgIconArrayEdit.length; i++) {
+            if (imgIconArrayEdit[i].name === file) {
+                imgIconArrayEdit.splice(i, 1);
+                break;
+            }
+        }
+        $(this).parent().parent().remove();
+    });
+}
+
+function editCategory(categoryId) {
+    var url = "/api/editCategory";
+    var categoryName = document.getElementById("editCategoryName").value;
+    var seqno = document.getElementById("editSeqno").value;
+    debugger;
+    var formData = new FormData();
+    for (var i = 0; i < imgIconArrayEdit.length; i++) {
+        formData.append("categoryIcon", imgIconArrayEdit[i]);
+    }
+    formData.append("categoryId", categoryId);
+    formData.append("categoryName", categoryName);
+    formData.append("seqno", seqno);
+    var requestOptions = {
+        method: 'PUT',
+        body: formData,
+        redirect: 'follow'
+    };
+    fetch(url, requestOptions).then(response => response.json()).then((json) => {
+        if (json.success) {
+            Swal.fire({
+                title: 'แก้ไขประเภทสินค้าเรียบร้อย',
+                icon: 'success',
+                showconfirmbutton: true,
+                allowoutsideclick: false,
+                allowescapekey: false
+            }).then(function () {
+                //console.log(json.data);
+                window.location.href = "/productmanage";
+            });
+        }
+        else {
+            Swal.fire(
+                'แก้ไขสินค้าไม่สำเร็จ',
+                '',
+                'error'
+            );
+        }
+    });
 }

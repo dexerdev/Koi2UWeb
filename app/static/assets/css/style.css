@@ -283,12 +283,16 @@ p {
 }
 
 .upload__box,
-.upload_edit_box {
+.upload_edit_box,
+.upload_edit_box_icon,
+.upload__box_icon {
   margin-top: 1.5rem;
 }
 
 .upload__inputfile,
-.upload_edit_inputfile {
+.upload_edit_inputfile,
+.upload_edit_inputfile_icon,
+.upload__inputfile_icon {
   width: 0.1px;
   height: 0.1px;
   opacity: 0;
@@ -298,7 +302,9 @@ p {
 }
 
 .upload__btn,
-.upload_edit_btn {
+.upload_edit_btn,
+.upload_edit_btn_icon,
+.upload__btn_icon {
   display: inline-block;
   font-weight: 500;
   color: #fff;
@@ -317,33 +323,43 @@ p {
 }
 
 .upload__btn:hover,
-.upload_edit_btn:hover {
+.upload_edit_btn:hover,
+.upload_edit_btn_icon:hover,
+.upload__btn_icon:hover {
   background-color: unset;
   color: #4045ba;
   transition: all 0.3s ease;
 }
 
 .upload__btn-box,
-.upload_edit_btn-box {
+.upload_edit_btn-box,
+.upload_edit_btn-box_icon,
+.upload__btn-box_icon {
   margin-bottom: 10px;
 }
 
 .upload__img-wrap,
-.upload_edit_img-wrap {
+.upload_edit_img-wrap,
+.upload_edit_img-wrap_icon,
+.upload__img-wrap_icon {
   display: flex;
   flex-wrap: wrap;
   margin: 0 -10px;
 }
 
 .upload__img-box,
-.upload_edit_img-box {
+.upload_edit_img-box,
+.upload_edit_img-box_icon,
+.upload__img-box_icon {
   width: 180px;
   padding: 0 5px;
   margin-bottom: 12px;
 }
 
 .upload__img-close,
-.upload_edit_img-close {
+.upload_edit_img-close,
+.upload_edit_img-close_icon,
+.upload__img-close_icon {
   width: 24px;
   height: 24px;
   border-radius: 50%;
@@ -358,7 +374,9 @@ p {
 }
 
 .upload__img-close:after,
-.upload_edit_img-close:after {
+.upload_edit_img-close:after,
+.upload_edit_img-close_icon:after,
+.upload__img-close_icon:after {
   content: "✖";
   font-size: 14px;
   color: white;
