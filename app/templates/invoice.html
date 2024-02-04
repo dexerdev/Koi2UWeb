@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Invoice</title>
+
+    <link rel="license" href="https://www.opensource.org/licenses/mit-license/">
+    <script src="/static/assets/js/invoice.js"></script>
+
+    <!-- Favicon -->
+    <link href="/static/assets/img/favicons/favicon.ico" rel="icon">
+
+
+    <!-- CSS Libraries -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="/static/assets/lib/slick/slick.css" rel="stylesheet">
+    <link href="/static/assets/lib/slick/slick-theme.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/assets/css/style2.css">
+
+    <!-- Google Fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Mitr' rel='stylesheet'>
+</head>
+
+<body>
+
+    <div class="headerin">
+        <div class="addsirinya">
+            <img src="/static/img/logo.png" style="max-width: fit-content;" alt="">
+            <div class="row ">
+                <div class="addsirin">
+                    <p> 9/1 ม.2 แขวงจันทรเกษม เขตจตุจักร กรุงเทพม 10900</p>
+                    <p>เบอร์โทรศัพท์ 095-2407-519</p>
+                    <p>เลขที่ประจำตัวผู้เสียภาษี 01234567891011</p>
+                </div>
+            </div>
+        </div>
+        <div class="headinvoice">
+            <h3>ใบเสร็จรับเงิน</h3>
+            <h6>ต้นฉบับ</h6>
+        </div>
+    </div>
+
+
+
+    <div class="tableuser mb-4">
+        <table class="meta1 ">
+            <tr>
+                <th><span>นามผู้ซื้อ</span></th>
+                <td><span>{{invoiceDet.firstname}} {{invoiceDet.lastname}} โทร. {{invoiceDet.telNo}}</span></td>
+            </tr>
+            <tr>
+                <th><span>ที่อยู่</span></th>
+                <td><span>{{invoiceDet.addressText}} {{invoiceDet.subDistrict}} {{invoiceDet.district}} {{invoiceDet.province}} {{invoiceDet.zipcode}}</span>
+                </td>
+            </tr>
+        </table>
+        <table class="meta2">
+            <tr>
+                <th><span>เลขที่ใบเสร็จ #</span></th>
+                <td><span>{{invoiceDet.paymentId}}</span></td>
+            </tr>
+            <tr>
+                <th><span>วัน/เดือน/ปี</span></th>
+                <td><span>{{invoiceDet.payDate}}</span></td>
+            </tr>
+            <!-- <tr>
+                <th><span>Amount Due</span></th>
+                <td><span id="prefix">฿</span><span>600.00</span></td>
+            </tr> -->
+        </table>
+    </div>
+
+    <div class="table-list">
+        <div class="table-hi">
+            <table class="inventory mt-2">
+                <thead>
+                    <tr>
+                        <th><span contenteditable>เลขที่</span></th>
+                        <th><span contenteditable>รายการ</span></th>
+                        <th><span contenteditable>ราคา/หน่วย</span></th>
+                        <th><span contenteditable>จำนวน</span></th>
+                        <th><span contenteditable>ส่วนลด</span></th>
+                        <th><span contenteditable>จำนวนเงิน</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for payDet in invoiceDet.paymentDetail %}
+                    <tr>
+                        <td><span contenteditable>{{loop.index}}</span></td>
+                        <td><span contenteditable>{{payDet.productName}}</span></td>
+                        <td><span data-prefix>฿</span><span contenteditable>{{payDet.price}}</span></td>
+                        <td><span contenteditable>{{payDet.qty}}</span></td>
+                        <td><span contenteditable>0</span></td>
+                        <td><span data-prefix>฿</span><span>{{payDet.price * payDet.qty}}</span></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                <!-- <tbody>
+                    {% for payDet in invoiceDet.paymentDetail %}
+                    <tr>
+                        <td><span contenteditable>{{loop.index}}</span></td>
+                        <td><span contenteditable>{{payDet.productName}}</span></td>
+                        <td><span data-prefix>฿</span><span contenteditable>{{payDet.price}}</span></td>
+                        <td><span contenteditable>{{payDet.qty}}</span></td>
+                        <td><span contenteditable>0</span></td>
+                        <td><span data-prefix>฿</span><span>{{payDet.price * payDet.qty}}</span></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                <tbody>
+                    {% for payDet in invoiceDet.paymentDetail %}
+                    <tr>
+                        <td><span contenteditable>{{loop.index}}</span></td>
+                        <td><span contenteditable>{{payDet.productName}}</span></td>
+                        <td><span data-prefix>฿</span><span contenteditable>{{payDet.price}}</span></td>
+                        <td><span contenteditable>{{payDet.qty}}</span></td>
+                        <td><span contenteditable>0</span></td>
+                        <td><span data-prefix>฿</span><span>{{payDet.price * payDet.qty}}</span></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                <tbody>
+                    {% for payDet in invoiceDet.paymentDetail %}
+                    <tr>
+                        <td><span contenteditable>{{loop.index}}</span></td>
+                        <td><span contenteditable>{{payDet.productName}}</span></td>
+                        <td><span data-prefix>฿</span><span contenteditable>{{payDet.price}}</span></td>
+                        <td><span contenteditable>{{payDet.qty}}</span></td>
+                        <td><span contenteditable>0</span></td>
+                        <td><span data-prefix>฿</span><span>{{payDet.price * payDet.qty}}</span></td>
+                    </tr>
+                    {% endfor %}
+                </tbody> -->
+                
+            </table>
+        </div>
+        
+
+        <table class="balance mb-4">
+            <tr>
+                <th ></th>
+                <td><span contenteditable>ยอดเงินรวม</span></td>
+                <td><span data-prefix>฿</span><span>{{invoiceDet.total}}</span></td>
+            </tr>
+            <tr>
+                <th></th>
+                <td><span contenteditable>ส่วนลดทั้งหมด</span></td>
+                <td><span data-prefix>฿</span><span>{{invoiceDet.discountTotal}}</span></td>
+            </tr>
+            <tr>
+                <th></th>
+                <td><span contenteditable>ค่าจัดส่ง</span></td>
+                <td><span data-prefix>฿</span><span>{{invoiceDet.deliveryFee}}</span></td>
+            </tr>
+            <tr>
+                <th><span contenteditable></span>({{invoiceDet.totalThaiBath}})</th>
+                <td><span contenteditable>ยอดสุทธิ</span></td>
+                <td><span data-prefix>฿</span><span>{{invoiceDet.totalAmount}}</span></td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="container">
+        <div class="space">
+
+        </div>
+    </div>
+
+    <table class="footerin justify-content-between">
+        <tr>
+            <th><span>(. . . . . . . . . . . . . . . . . . . . . . . . . . .)</span></th>
+            <th><span>(. . . . . . . . . . . . . . . . . . . . . . . . . . .)</span></th>
+        </tr>
+        <tr>
+            <th><span>วันที่/date. . . . . . / . . . . . . / . . . . . .</span></th>
+            <th><span>วันที่/date. . . . . . / . . . . . . / . . . . . .</span></th>
+        </tr>
+        <tr>
+            <th><span>ผู้รับสินค้า Received by . . . . . . . . .</span></th>
+            <th><span>ผู้ส่งสินค้า Delivery by . . . . . . . . .</span></th>
+        </tr>
+    </table>
+
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="/static/assets/js/main.js"></script>
+</body>

@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>E Store - eCommerce </title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="eCommerce" name="keywords">
+    <meta content="eCommerce" name="description">
+
+    <!-- Favicon -->
+    <!-- <link href="/static/assets/img/favicon.ico" rel="icon"> -->
+
+    <!-- Google Fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Mitr' rel='stylesheet'>
+    <!-- CSS Libraries -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <!-- <link href="/static/assets/lib/slick/slick.css" rel="stylesheet"> -->
+    <!-- <link href="/static/assets/lib/slick/slick-theme.css" rel="stylesheet"> -->
+    <link href="/static/assets/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+
+    <!-- Template Stylesheet -->
+</head>
+
+<body>
+
+    <!-- Nav Bar Start -->
+    <div class="nav">
+        <div class="container-fluid">
+            <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+                <a href="#" class="navbar-brand">MENU</a>
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                    <div class="navbar-nav ml-auto">
+                        <div class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">{{username}}</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <!-- Nav Bar End -->
+
+    <!-- productmanage Start -->
+    <div class="my-account">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="nav flex-column nav-pills" role="tablist" aria-orientation="vertical">
+                        <div class="nav flex-column nav-pills" role="tablist" aria-orientation="vertical">
+                            <div class="head-manage text-center">
+                                <h2>การจัดการข้อมูล</h2>
+                            </div>
+                            <a class="nav-link" id="" href="/productmanage" role="tab"><i
+                                    class="fa fa-shopping-bag"></i>&nbsp;&nbsp;การจัดการสินค้า</a>
+                            <a class="nav-link" id="" href="/productgroup" role="tab"><i
+                                    class="fa fa-shopping-bag"></i>&nbsp;&nbsp;การจัดการกลุ่มสินค้า</a>
+                            <a class="nav-link" id="" href="/promotionmanage" role="tab">
+                                <i class="fas fa-gift"></i>&nbsp;&nbsp;การจัดโปรโมชัน</a>
+                            <a class="nav-link" id="" href="/usermanage" role="tab"><i
+                                    class="fa fa-user"></i>&nbsp;&nbsp;การจัดการสมาชิก</a>
+                            <a class="nav-link" id="" href="/billmanage" role="tab"><i
+                                    class="fa fa-shopping-cart"></i>&nbsp;ตรวจสอบการสั่งสินค้า</a>
+                            <a class="nav-link" id="" href="/deliverymanage" role="tab"><i
+                                    class="fa fa-truck"></i>&nbsp;ตรวจสอบการส่งสินค้า</a>
+                            <a class="nav-link" id="" href="/orderhistory" role="tab"><i
+                                    class="fa fa-file"></i>&nbsp;&nbsp;ประวัติการสั่งซื้อ</a>
+                            <a class="Logout nav-link " href="/logout"><i class="fa fa-sign-out-alt"></i>Logout</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="tab-content">
+                        <div class="tab-pane fade show active" id="productmanage" role="tabpanel"
+                            aria-labelledby="productmanage-nav">
+                            <div class="text-center">
+                                <h2>การจัดการโปรโมชัน</h2>
+                            </div>
+                        </div>
+                        <div class="addPromo"><!-- Bottom Bar Start -->
+                            <div class="bottom-bar">
+                                <div class="container-fluid">
+                                    <div class="row align-items-right">
+                                        <div class="col-md-3">
+                                            <button class="btn btn-success" data-toggle="modal"
+                                                data-target="#addPromotion">
+                                                <i class="fas fa-plus-circle mr-2"></i>เพิ่มโปรโมชัน</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- Bottom Bar End -->
+                        <table id="tablePromotion" class="table table-striped table-hover">
+                            <thead class="theadheader">
+                                <tr>
+                                    <th class="text-center">รหัสโปรโมชัน</th>
+                                    <th class="text-center">ส่วนลด</th>
+                                    <th class="text-center">หน่วย</th>
+                                    <th class="text-center">จำนวนรหัส</th>
+                                    <th class="text-center">วันที่เริ่ม</th>
+                                    <th class="text-center">วันที่หมดอายุ</th>
+                                    <th class="text-center">จัดการ</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for promo in promoLs %}
+                                <tr>
+                                    <td class="text-center">{{promo.promoCode}}</td>
+                                    <td class="text-center">{{promo.discount}}</td>
+                                    <td class="text-center">{{promo.discountType}}</td>
+                                    <td class="text-center">{{promo.limitCode}}</td>
+                                    <td class="text-center">{{promo.startDate}}</td>
+                                    <td class="text-center">{{promo.endDate}}</td>
+                                    <td class="text-center">
+                                        <!-- <a href="#" class="settings text-warning"><i class="fas fa-cog mr-2"
+                                                data-toggle="modal" data-target="#editProductModal"></i></a> -->
+                                        <a href="#" class="settings text-warning"
+                                            onclick="getPromotionId('{{promo.promoId}}')" title="Settings"><i
+                                                class="fas fa-cog mr-2"></i></a>
+                                        <a href="#" class="delete text-danger"
+                                            onclick="delPromotionId('{{promo.promoId}}')">
+                                            <i class="fas fa-trash-alt mr-2"></i></a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- productmanage End -->
+
+
+
+
+
+    <!--Start Modal Add Promotion -->
+    <div class="modal fade" id="addPromotion" tabindex="-1" role="dialog" aria-labelledby="addPromotionTitle"
+        aria-hidden="true"  data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addPromotionTitle">เพิ่มข้อมูลโปรโมชัน</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Add Promotion Start -->
+                    <div class="container-fluid mt-2">
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <span class="ml-1">รหัสโปรโมชัน</span>
+                                            <input type="text" id="promoCode" class="form-control">
+                                        </div>
+                                        <div class="col-7">
+                                            <span class="ml-1">ชื่อโปรโมชัน</span>
+                                            <input type="text" id="promoDescription" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <span class="ml-1" for="startDate">วันที่เริ่ม</span>
+                                            <!-- <input type="text" id="targetAmount" class="form-control"> -->
+                                            <input type="datetime-local" class="form-control" id="startDate"
+                                                name="startDate">
+                                        </div>
+                                        <div class="col-5">
+                                            <span class="ml-1" for="endDate">วันที่หมดอายุ</span>
+                                            <!-- <input type="text" id="targetAmount" class="form-control"> -->
+                                            <input type="datetime-local" class="form-control" id="endDate"
+                                                name="endDate">
+                                        </div>
+                                        <div class="col-2">
+                                            <span class="ml-1">สถานะ</span>
+                                            <select class="form-control" id="activeFlag">
+                                                <option selected>Active</option>
+                                                <option>InActive</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-3">
+                                            <span class="ml-1">จำนวนเงินขั้นต่ำ</span>
+                                            <input type="text" id="targetAmount" class="form-control">
+                                        </div>
+                                        <div class="col-3">
+                                            <span class="ml-1">ส่วนลด</span>
+                                            <input type="text" id="discount" class="form-control">
+                                        </div>
+                                        <div class="col-3">
+                                            <span class="ml-1">หน่วยส่วนลด</span>
+                                            <select class="form-control" id="discountType">
+                                                <option value="percentage" selected>เปอร์เซ็นต์</option>
+                                                <option value="baht">บาท</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-3">
+                                            <span class="ml-1">จำนวนรหัส</span>
+                                            <input type="text" id="limitCode" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Add Promotion End -->
+                </div>
+                <div class="modal-footer ">
+                    <button type="button" class="col-md-2 btn btn-secondary" data-dismiss="modal">ปิด</button>
+                    <button type="button" onclick="createPromotion()" class="col-md-2 btn btn-primary">บันทึก</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--End Modal Add Promotion -->
+
+    <!--Start Modal Edit Promotion -->
+    <div class="modal fade" id="editPromotion" tabindex="-1" role="dialog" aria-labelledby="editPromotionTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editPromotionTitle">แก้ไขข้อมูลโปรโมชัน</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Edit Promotion Start -->
+                    <div class="container-fluid mt-2">
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <span class="ml-1">รหัสโปรโมชัน</span>
+                                            <input type="text" id="editPromoCode" class="form-control">
+                                        </div>
+                                        <div class="col-7">
+                                            <span class="ml-1">ชื่อโปรโมชัน</span>
+                                            <input type="text" id="editPromoDescription" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <span class="ml-1" for="editStartDate">วันที่เริ่ม</span>
+                                            <!-- <input type="text" id="targetAmount" class="form-control"> -->
+                                            <input type="datetime-local" class="form-control" id="editStartDate"
+                                                name="editStartDate">
+                                        </div>
+                                        <div class="col-5">
+                                            <span class="ml-1" for="editEndDate">วันที่หมดอายุ</span>
+                                            <!-- <input type="text" id="targetAmount" class="form-control"> -->
+                                            <input type="datetime-local" class="form-control" id="editEndDate"
+                                                name="editEndDate">
+                                        </div>
+                                        <div class="col-2">
+                                            <span class="ml-1">สถานะ</span>
+                                            <select class="form-control" id="editActiveFlag">
+                                                <option>Active</option>
+                                                <option>InActive</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-3">
+                                            <span class="ml-1">จำนวนเงินขั้นต่ำ</span>
+                                            <input type="text" id="editTargetAmount" class="form-control">
+                                        </div>
+                                        <div class="col-3">
+                                            <span class="ml-1">ส่วนลด</span>
+                                            <input type="text" id="editDiscount" class="form-control">
+                                        </div>
+                                        <div class="col-3">
+                                            <span class="ml-1">หน่วยส่วนลด</span>
+                                            <select class="form-control" id="editDiscountType">
+                                                <option value="percentage" selected>เปอร์เซ็นต์</option>
+                                                <option value="baht">บาท</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-3">
+                                            <span class="ml-1">จำนวนรหัส</span>
+                                            <input type="text" id="editLimitCode" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Edit Promotion End -->
+                </div>
+                <div class="modal-footer ">
+                    <button type="button" class="col-md-2 btn btn-secondary" data-dismiss="modal">ปิด</button>
+                    <button type="button" id="btnEditPromotion" class="col-md-2 btn btn-primary">บันทึก</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--End Modal Edit Promotion -->
+
+
+    <!-- Back to Top -->
+    <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <!-- <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/slick/slick.min.js"></script> -->
+    <script type="text/javascript" charset="utf8"
+        src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Template Javascript -->
+    <script>
+        $(document).ready(function () {
+            $('#tableProductGroup').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": true,
+                "ordering": true,
+                "info": false,
+                "autoWidth": false,
+                "responsive": true,
+            });
+
+            // $('#tableProductGroupDetail').DataTable({
+            //     "paging": true,
+            //     "lengthChange": false,
+            //     "searching": true,
+            //     "ordering": true,
+            //     "info": false,
+            //     "autoWidth": false,
+            //     "responsive": true,
+            // });
+
+            $('#tableProductAll').DataTable({
+                "paging": true,
+                "searching": true,
+                "ordering": true,
+                "responsive": true,
+            });
+        });
+
+    </script>
+    <script src="static/assets/js/promotion.js"></script>
+    <script src="static/assets/js/session.js"></script>
+
+
+</body>
+
+</html>
