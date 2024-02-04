@@ -707,7 +707,8 @@ def editCategory():
         categoryData = request.form
         payload={'categoryId':categoryData['categoryId'],
                 'categoryName': categoryData['categoryName'],
-                'seqno': categoryData['seqno']}
+                'seqno': categoryData['seqno'],
+                'editIconImages': categoryData['editIconImages']}
         files = []
         for file in request.files.getlist('categoryIcon'):
             files.append(('categoryIcon', (file.filename, file.read(), file.content_type)))

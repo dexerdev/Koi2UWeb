@@ -653,7 +653,9 @@ function getCategory(categoryId) {
             imgWraps.forEach(imgWrap => {
                 imgWrap.innerHTML = '';
             });
+            
             if (data.data.thumbnail != null) {
+                imgIconArrayEdit.push({"categoryId": data.data.categoryId});
                 var html = "<div class='upload_edit_img-box_icon'><div style='background-image: url(data:image/png;base64," + data.data.thumbnail + ")' onclick='editIconClose(" + data.data.categoryId + ")' data-number='" + $(".upload_edit_img-close_icon").length + "' data-file='oldicon-" + categoryId + "' class='img-bg'><div class='upload_edit_img-close_icon'></div></div></div>";
                 imgWraps.forEach(imgWrap => {
                     imgWrap.innerHTML += html;
@@ -759,11 +761,23 @@ function editCategory(categoryId) {
     var url = "/api/editCategory";
     var categoryName = document.getElementById("editCategoryName").value;
     var seqno = document.getElementById("editSeqno").value;
-    debugger;
     var formData = new FormData();
     for (var i = 0; i < imgIconArrayEdit.length; i++) {
         formData.append("categoryIcon", imgIconArrayEdit[i]);
     }
+    debugger;
+    var editIconImages = [];
+    for (var i = 0; i < imgIconArrayEdit.length; i++) {
+        if (typeof imgIconArrayEdit[i] === 'object' && !(imgIconArrayEdit[i] instanceof File)) {
+            editIconImages.push(imgIconArrayEdit[i]);
+        } else if (imgIconArrayEdit[i] instanceof File) {
+            formData.append("productImages", imgIconArrayEdit[i]);
+        } else {
+            console.log("Other:", imgIconArrayEdit[i]);
+        }
+    }
+    formData.append("editIconImages", JSON.stringify(editIconImages));
+
     formData.append("categoryId", categoryId);
     formData.append("categoryName", categoryName);
     formData.append("seqno", seqno);
