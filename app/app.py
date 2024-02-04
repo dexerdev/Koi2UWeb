@@ -72,6 +72,10 @@ def usermanage():
     except Exception as e:
         raise e
 
+@app.route("/addsticker")
+def addsticker():
+    return render_template("addsticker.html")
+
 @app.route("/login")
 def login():
     return render_template("login.html")
