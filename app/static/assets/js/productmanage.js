@@ -84,6 +84,7 @@ function createProduct() {
     var categoryId = document.getElementById("category").value;
     var productQty = document.getElementById("productQty").value;
     var productUnit = document.getElementById("productUnit").value;
+    var feeDelivery = document.getElementById("feeDelivery").value;
     var isNumeric = !isNaN(parseFloat(productPrice)) && isFinite(productPrice);
 
     if (productName === "") {
@@ -149,6 +150,7 @@ function createProduct() {
     formData.append("createDate", today);
     formData.append("qty", productQty);
     formData.append("unit", productUnit);
+    formData.append("feeDelivery", feeDelivery);
     var requestOptions = {
         method: 'POST',
         body: formData,
@@ -348,6 +350,7 @@ function getProduct(productId) {
             document.getElementById("editProductDetail").value = json.data.productDetail;
             document.getElementById("editProductQty").value = json.data.qty;
             document.getElementById("editProductUnit").value = json.data.unit;
+            document.getElementById("editFeeDelivery").value = json.data.feeDelivery;
             // document.getElementById("showProductImage").src = 'data:image/png;base64,' + json.data.imageBase64;
             loadEditImages(json.data.images);
             document.getElementById("btnEditProduct").setAttribute('onclick', 'editProduct(' + productId + ')');
@@ -492,6 +495,7 @@ function editProduct(productId) {
     var categoryId = document.getElementById("editCategory").value;
     var productQty = document.getElementById("editProductQty").value;
     var productUnit = document.getElementById("editProductUnit").value;
+    var feeDelivery = document.getElementById("editFeeDelivery").value
     var formDataEdit = new FormData();
     var editImages = [];
     for (var i = 0; i < imgArrayEdit.length; i++) {
@@ -503,6 +507,7 @@ function editProduct(productId) {
             console.log("Other:", imgArrayEdit[i]);
         }
     }
+    debugger;
     formDataEdit.append("editImages", JSON.stringify(editImages));
     formDataEdit.append("productName", productName);
     formDataEdit.append("productDetail", productDetail);
@@ -512,7 +517,7 @@ function editProduct(productId) {
     formDataEdit.append("qty", productQty);
     formDataEdit.append("unit", productUnit);
     formDataEdit.append("productId", productId);
-
+    formDataEdit.append("feeDelivery", feeDelivery);
     var requestOptions = {
         method: 'PUT',
         body: formDataEdit,
@@ -644,7 +649,6 @@ function getCategory(categoryId) {
     EditIconUpload()
     var url = '/api/getCategoryId?categoryId=' + categoryId;
     fetch(url).then(response => response.json()).then((data) => {
-        debugger;
         if (data.success) {
             document.getElementById("editSeqno").value = data.data.seqno;
             document.getElementById("editCategoryName").value = data.data.categoryName;
@@ -771,7 +775,7 @@ function editCategory(categoryId) {
         if (typeof imgIconArrayEdit[i] === 'object' && !(imgIconArrayEdit[i] instanceof File)) {
             editIconImages.push(imgIconArrayEdit[i]);
         } else if (imgIconArrayEdit[i] instanceof File) {
-            formData.append("productImages", imgIconArrayEdit[i]);
+            formData.append("categoryIcon", imgIconArrayEdit[i]);
         } else {
             console.log("Other:", imgIconArrayEdit[i]);
         }
