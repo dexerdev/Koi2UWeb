@@ -278,7 +278,8 @@ def editProduct():
                 'categoryId': productData['categoryId'],
                 'editImages': productData['editImages'],
                 'qty': productData['qty'],
-                'unit': productData['unit']}
+                'unit': productData['unit'],
+                'feeDelivery': productData['feeDelivery']}
         files = []
         for file in request.files.getlist('productImages'):
             files.append(('productImages', (file.filename, file.read(), file.content_type)))
@@ -427,17 +428,18 @@ def getPromotionId():
 def editPromotion():
     try:
         result = apiResult.apiResult()
-        promoId = request.json.get('promoId')
-        promoCode = request.json.get('promoCode')
-        promoDescription = request.json.get('promoDescription')
-        startDate = request.json.get('startDate')
-        endDate = request.json.get('endDate')
-        targetAmount = request.json.get('targetAmount')
-        discount = request.json.get('discount')
-        discountType = request.json.get('discountType')
-        limitCode = request.json.get('limitCode')
-        updateDate = request.json.get('updateDate')
-        activeFlag = request.json.get('activeFlag')
+        promoData = request.form
+        promoId = promoData['promoId']
+        promoCode = promoData['promoCode']
+        promoDescription = promoData['promoDescription']
+        startDate = promoData['startDate']
+        endDate = promoData['endDate']
+        targetAmount = promoData['targetAmount']
+        discount = promoData['discount']
+        discountType = promoData['discountType']
+        limitCode = promoData['limitCode']
+        updateDate = promoData['updateDate']
+        activeFlag = promoData['activeFlag']
         payload = {
             "promoId":promoId,
             "promoCode": promoCode,
@@ -449,9 +451,13 @@ def editPromotion():
             "discountType":discountType,
             "activeFlag": activeFlag,
             "limitCode": limitCode,
-            "updateDate": updateDate
+            "updateDate": updateDate,
+            'editBGImages': promoData['editBGsImages']
         }
-        promo = requests.request("PUT",urlAPI+'api/editPromotion',json=payload).json()
+        files = []
+        for file in request.files.getlist('edit_promo_bg'):
+            files.append(('edit_promo_bg', (file.filename, file.read(), file.content_type)))
+        promo = requests.request("PUT", urlAPI+'api/editPromotion',data=payload,files=files).json()
         result.data = promo['data']
         result.success = True
         result.message = "Completed!!"
@@ -466,17 +472,18 @@ def editPromotion():
 def createPromotion():
     try:
         result = apiResult.apiResult()
-        promoCode = request.json.get('promoCode')
-        promoDescription = request.json.get('promoDescription')
-        startDate = request.json.get('startDate')
-        endDate = request.json.get('endDate')
-        targetAmount = request.json.get('targetAmount')
-        discount = request.json.get('discount')
-        discountType = request.json.get('discountType')
-        limitCode = request.json.get('limitCode')
-        updateDate = request.json.get('updateDate')
-        createDate = request.json.get('createDate')
-        activeFlag = request.json.get('activeFlag')
+        promoData = request.form
+        promoCode = promoData['promoCode']
+        promoDescription = promoData['promoDescription']
+        startDate = promoData['startDate']
+        endDate = promoData['endDate']
+        targetAmount = promoData['targetAmount']
+        discount = promoData['discount']
+        discountType = promoData['discountType']
+        limitCode = promoData['limitCode']
+        updateDate = promoData['updateDate']
+        createDate = promoData['createDate']
+        activeFlag = promoData['activeFlag']
         payload = {
             "promoCode": promoCode,
             "promoDescription": promoDescription,
@@ -490,7 +497,10 @@ def createPromotion():
             "updateDate": updateDate,
             "createDate":createDate
         }
-        promo = requests.request("POST",urlAPI+'api/createPromotion',json=payload).json()
+        files = []
+        for file in request.files.getlist('promo_bg'):
+            files.append(('promo_bg', (file.filename, file.read(), file.content_type)))
+        promo = requests.request("POST", urlAPI+'api/createPromotion',data=payload,files=files).json()
         result.data = promo['data']
         result.success = True
         result.message = "Completed!!"

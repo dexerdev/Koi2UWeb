@@ -15,6 +15,9 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
 
     <link rel="stylesheet" href="/static/assets/css/addsticker.css">
+    <style>
+        
+    </style>
 </head>
 
 <body>
@@ -46,10 +49,11 @@
             </div>
             <div class="addsticker-bot">
                 <div class="barcodebot">
-                    <img src="https://img.freepik.com/free-psd/barcode-illustration-isolated_23-2150584086.jpg?size=626&ext=jpg&ga=GA1.1.1448711260.1706918400&semt=sph" alt="barcode">
+                    <img src="https://img.freepik.com/free-psd/barcode-illustration-isolated_23-2150584086.jpg?size=626&ext=jpg&ga=GA1.1.1448711260.1706918400&semt=sph"
+                        alt="barcode">
                 </div>
                 <div class="notes">
-                    <p style="text-decoration-line: underline; font-weight: 400;" ><strong>หมายเหตุ:</strong></p>
+                    <p style="text-decoration-line: underline; font-weight: 400;"><strong>หมายเหตุ:</strong></p>
                     <p>3 x ชุดสะดือครบบชุด</p>
                     <p>3 x ชุดสะดือครบบชุด</p>
                     <p>3 x ชุดสะดือครบบชุด</p>
@@ -63,8 +67,6 @@
     </div>
 
 
-
-
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
@@ -72,5 +74,13 @@
     <script type="text/javascript" charset="utf8"
         src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
 </body>
+<button onclick="printSticker()">Print Sticker</button>
+
+<script>
+    function printSticker() {
+        window.print();
+    }
+</script>
+
 
 </html>
