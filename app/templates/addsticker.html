@@ -16,7 +16,7 @@
 
     <link rel="stylesheet" href="/static/assets/css/addsticker.css">
     <style>
-        
+
     </style>
 </head>
 
@@ -39,14 +39,25 @@
             <div class="addsticker-mid">
                 <div class="addressto">
                     <p>ชื่อและที่อยู่ผู้รับ</p>
-                    <p>บริษัท ไทย โฮม ดิเวลอปเมนต์ จำกัด</p> <!--ชื่อบริษัท  -->
-                    <p>เลขที่ 612 หมู่7 ซอย -</p> <!-- เลขที่ หมู่ ซอย  -->
-                    <p>ถนน - ตำบลหินเหล็กไฟ</p><!--ถนน ตำบล  -->
-                    <p>อำเภอหัวหิน จังหวัดประจวบคีรีขีนธ์ 77110</p> <!--อำเภอ จังหวัด  -->
-                    <p>เลขที่ผู้เสียภาษี 0775565001408</p> <!-- เลขที่ผู้เสียภาษี -->
-                    <p>โทรศัพท์: 084-802-6886</p> <!-- โทรศัพท์ -->
+                    <p>{{invoiceDet.firstname}} {{invoiceDet.lastname}}</p>
+                    <p>{{invoiceDet.addressText}}</p>
+                    <p>{{invoiceDet.subDistrict}}</p>
+                    <p> {{invoiceDet.district}} {{invoiceDet.province}} {{invoiceDet.zipcode}}</p>
+                    <p>เลขที่ผู้เสียภาษี 0775565001408</p>
+                    <p>โทรศัพท์: {{invoiceDet.telNo}}</p>
                 </div>
             </div>
+            <!-- <div class="addsticker-mid">
+                <div class="addressto">
+                    <p>ชื่อและที่อยู่ผู้รับ</p>
+                    <p>บริษัท ไทย โฮม ดิเวลอปเมนต์ จำกัด</p>
+                    <p>เลขที่ 612 หมู่7 ซอย -</p>
+                    <p>ถนน - ตำบลหินเหล็กไฟ</p>
+                    <p>อำเภอหัวหิน จังหวัดประจวบคีรีขีนธ์ 77110</p> 
+                    <p>เลขที่ผู้เสียภาษี 0775565001408</p>
+                    <p>โทรศัพท์: 084-802-6886</p> 
+                </div>
+            </div> -->
             <div class="addsticker-bot">
                 <div class="barcodebot">
                     <img src="https://img.freepik.com/free-psd/barcode-illustration-isolated_23-2150584086.jpg?size=626&ext=jpg&ga=GA1.1.1448711260.1706918400&semt=sph"
@@ -54,6 +65,7 @@
                 </div>
                 <div class="notes">
                     <p style="text-decoration-line: underline; font-weight: 400;"><strong>หมายเหตุ:</strong></p>
+                    <p>3 x ชุดสะดือครบบชุด</p>
                     <p>3 x ชุดสะดือครบบชุด</p>
                     <p>3 x ชุดสะดือครบบชุด</p>
                     <p>3 x ชุดสะดือครบบชุด</p>
@@ -74,7 +86,9 @@
     <script type="text/javascript" charset="utf8"
         src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
 </body>
-<button onclick="printSticker()">Print Sticker</button>
+<button class="print" onclick="printSticker()"><img
+        src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/printer-design-template-dad26fbc83a603e2b4ae873bdb1b6b34_screen.jpg?ts=1581063816" style="width: 80px;"
+        alt=""></button>
 
 <script>
     function printSticker() {

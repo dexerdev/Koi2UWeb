@@ -113,6 +113,17 @@
                                                 data-target="#ManageCategory"><i
                                                     class="fas fa-plus-circle mr-2"></i>จัดการประเภทสินค้า</button>
                                         </div>
+                                        <div class="col-md-4">
+
+                                        </div>
+                                        <div class="col-md-1">
+                                            <div class="ytlink">
+                                                <a href="https://www.youtube.com/" target="_blank" class="youtubetop"><i
+                                                        class="fab fa-youtube"></i>
+                                                        <!-- <span class="icon-text">youtube</span> -->
+                                                    </a>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -199,8 +210,8 @@
                                         {% for cate in categoryLs %}
                                         <tr>
                                             <td class="text-center"><img
-                                                src="data:image/png;base64,{{cate.thumbnail if cate.thumbnail is not none else ''}}"
-                                                height="30px"></td>
+                                                    src="data:image/png;base64,{{cate.thumbnail if cate.thumbnail is not none else ''}}"
+                                                    height="30px"></td>
                                             <td class="text-center">{{cate.seqno}}</td>
                                             <td class="text-center">{{cate.categoryName}}</td>
                                             <td class="text-center">
@@ -321,7 +332,8 @@
                                                 <label class="upload_edit_btn_icon">
                                                     <p>Upload Icon</p>
                                                     <input type="file" multiple="" data-max_length_icon="1"
-                                                        class="upload_edit_inputfile_icon" id="upload_edit_inputfile_icon">
+                                                        class="upload_edit_inputfile_icon"
+                                                        id="upload_edit_inputfile_icon">
                                                 </label>
                                             </div>
                                             <div class="upload_edit_img-wrap_icon"></div>
@@ -335,7 +347,8 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="col-md-2 btn btn-secondary" data-dismiss="modal">ปิด</button>
-                    <button type="button" id="btnEditCategory"onclick="editCategory()" class="col-md-2 btn btn-primary">บันทึก</button>
+                    <button type="button" id="btnEditCategory" onclick="editCategory()"
+                        class="col-md-2 btn btn-primary">บันทึก</button>
                 </div>
             </div>
         </div>
@@ -395,10 +408,20 @@
                                 </div>
                                 <div class="col-md-12">
                                     <div class="row">
-                                        <div class="col-4">
+                                        <div class="col-md-4">
                                             <span class="ml-1">ค่าจัดส่งต่อชิ้น</span>
                                             <!-- <input type="text" id="productPrice" class="form-control"> -->
-                                            <input type="number" step="0.1" value="0" id="feeDelivery" class="form-control">
+                                            <input type="number" step="0.1" value="0" id="feeDelivery"
+                                                class="form-control">
+                                        </div>
+                                        <div class="col-md-6"></div>
+                                        <div class="col-md-2 align-self-center mt-2">
+                                            <div class="ytlink">
+                                                <a href="https://www.youtube.com/" target="_blank" class="youtubetop"><i
+                                                        class="fab fa-youtube"></i>
+                                                        <!-- <span class="icon-text">youtube</span> -->
+                                                    </a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -492,7 +515,8 @@
                                         <div class="col-4">
                                             <span class="ml-1">ค่าจัดส่งต่อชิ้น</span>
                                             <!-- <input type="text" id="productPrice" class="form-control"> -->
-                                            <input type="number" step="0.1" value="0" id="editFeeDelivery" class="form-control">
+                                            <input type="number" step="0.1" value="0" id="editFeeDelivery"
+                                                class="form-control">
                                         </div>
                                     </div>
                                 </div>

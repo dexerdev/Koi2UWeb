@@ -72,9 +72,6 @@ def usermanage():
     except Exception as e:
         raise e
 
-@app.route("/addsticker")
-def addsticker():
-    return render_template("addsticker.html")
 
 @app.route("/login")
 def login():
@@ -131,8 +128,7 @@ def deliverymanage():
     if not 'logged_in' in session:
         return render_template("login.html")
     else:
-        return render_template("deliverymanage.html",username = session['username'],deliveryList = deliveryList['data'])
-
+        return render_template("deliverymanage.html",username = session['username'],deliveryList = deliveryList['data']) 
 @app.route("/promotionmanage")
 def promotionmanage(): 
     promoLs = requests.get(urlAPI+'api/getPromotion').json()
@@ -578,6 +574,39 @@ def apiRecievedPayment():
         result.error = str(e)
     return jsonify(result.__dict__)
 
+@app.route("/addsticker")
+def addsticker():
+    paymentId = request.args.get('paymentId')
+    _paymentDet = requests.get(urlAPI+'api/getPaymentDetail',params={"paymentId":paymentId}).json()
+    _paymentDet = _paymentDet['data']
+    invoiceDet = paymentModel.invoiceModel()
+    invoiceDet.addressText = _paymentDet[0]['addressText']
+    invoiceDet.subDistrict = _paymentDet[0]['subDistrict']
+    invoiceDet.district = _paymentDet[0]['district']
+    invoiceDet.province = _paymentDet[0]['province']
+    invoiceDet.zipcode = _paymentDet[0]['zipcode']
+    invoiceDet.firstname = _paymentDet[0]['firstName']
+    invoiceDet.lastname = _paymentDet[0]['lastName']
+    if _paymentDet[0]['payDate'] != None:
+        invoiceDet.payDate = datetime.strptime(_paymentDet[0]['payDate'],'%Y-%m-%dT%H:%M:%S').strftime('%d/%m/%Y')
+    else:
+        invoiceDet.payDate = "ชำระปลายทาง"
+    invoiceDet.paymentId = _paymentDet[0]['paymentId']
+    invoiceDet.totalAmount = _paymentDet[0]['totalAmount']
+    invoiceDet.totalThaiBath =  thaiBath(_paymentDet[0]['totalAmount'])
+    invoiceDet.telNo = _paymentDet[0]['telNo']
+    invoiceDet.discountTotal = _paymentDet[0]['discountTotal']
+    invoiceDet.total = _paymentDet[0]['total']
+    invoiceDet.deliveryFee = _paymentDet[0]['deliveryFee']
+    paymentLs = []
+    for payDet in _paymentDet:
+        payDetail = paymentModel.paymentDetail()
+        payDetail.price = payDet['price']
+        payDetail.qty = payDet['qty']
+        payDetail.productName = payDet['productName']
+        paymentLs.append(payDetail)
+    invoiceDet.paymentDetail = paymentLs
+    return render_template("addsticker.html",invoiceDet = invoiceDet)
 
 @app.route("/invoice")
 def invoice():
