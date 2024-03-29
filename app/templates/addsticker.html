@@ -41,7 +41,7 @@
                     <p>ชื่อและที่อยู่ผู้รับ</p>
                     <p>{{invoiceDet.firstname}} {{invoiceDet.lastname}}</p>
                     <p>{{invoiceDet.addressText}}</p>
-                    <p> {{invoiceDet.subDistrict}}  {{invoiceDet.district}}</p>
+                    <p> {{invoiceDet.subDistrict}} {{invoiceDet.district}}</p>
                     <p> {{invoiceDet.province}} {{invoiceDet.zipcode}}</p>
                     <p>เลขที่ผู้เสียภาษี 0775565001408</p>
                     <p>โทรศัพท์: {{invoiceDet.telNo}}</p>
@@ -64,14 +64,20 @@
                         alt="barcode">
                 </div>
                 <div class="notes">
-                    <p style="text-decoration-line: underline; font-weight: 400;"><strong>หมายเหตุ:</strong></p>
+                    <p style="text-decoration-line: underline; font-weight: 500;"><strong>หมายเหตุ:</strong></p>
+                    {% for payDet in invoiceDet.paymentDetail %}
+                    {% if loop.index <= 6 %} <p>{{ payDet.qty }} <strong>X</strong> {{ payDet.productName }}</p>
+                        {% endif %}
+                        {% if loop.index == 7 %}
+                        ........*** สินค้าอื่นๆอีก ({{ invoiceDet.paymentDetail|length - 6 }} รายการ) ***........
+                        {% endif %}
+                        {% endfor %}
+                        <!-- <p>3 x ชุดสะดือครบบชุด</p>
                     <p>3 x ชุดสะดือครบบชุด</p>
                     <p>3 x ชุดสะดือครบบชุด</p>
                     <p>3 x ชุดสะดือครบบชุด</p>
-                    <p>3 x ชุดสะดือครบบชุด</p>
-                    <p>3 x ชุดสะดือครบบชุด</p>
-                    <p>3 x ชุดสะดือครบบชุด</p>
-                    <p>3 x ชุดสะดือครบบชุด</p>
+                    <p>3 x ชุดสะดือครบบชุด</p> -->
+                        <!-- <p> ........*** สินค้าอื่นๆอีก 2 รายการ ***........</p> -->
                 </div>
             </div>
         </div>
@@ -84,10 +90,11 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="text/javascript" charset="utf8"
         src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+    <script src="/static/assets/js/sticker.js"></script>
 </body>
 <button class="print" onclick="printSticker()"><img
-        src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/printer-design-template-dad26fbc83a603e2b4ae873bdb1b6b34_screen.jpg?ts=1581063816" style="width: 80px;"
-        alt=""></button>
+        src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/printer-design-template-dad26fbc83a603e2b4ae873bdb1b6b34_screen.jpg?ts=1581063816"
+        style="width: 80px;" alt=""></button>
 
 <script>
     function printSticker() {
