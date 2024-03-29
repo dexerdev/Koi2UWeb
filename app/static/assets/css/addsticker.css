@@ -91,22 +91,14 @@ p {
         box-sizing: border-box;
     }
 
-    .container {
-        width: 1200px;
-        padding: 1rem;
-        margin: 0 auto;
-    }
-
     .addsticker {
-        width: 956px;
-        height: 1450px;
-        border: 2px solid #333;
-        padding: 2.5rem 1.5rem;
+        width: 1100px;
+        border: none;
     }
 
     p {
         margin: 0;
-        font-size: 35px;
+        font-size: 20px;
         font-weight: 300;
     }
 
@@ -116,24 +108,22 @@ p {
     }
 
     .logostick {
-        width: 200px;
+        width: 150px;
         margin-bottom: 1rem;
     }
-
-    .logostick img {
+    .logoicstk img {
         width: 100%;
-        object-fit: cover;
-        
+        object-fit: cover; 
     }
 
     .barcodebot {
         width: 100%;
-        height: 80px;
+        height: 40px;
     }
 
     .barcodebot img {
-        width: 100%;
-        max-height: 80px;
+        width: 50%;
+        max-height: 40px;
         height: auto;
         background-position: center;
         object-fit: cover;
@@ -144,19 +134,21 @@ p {
     }
 
     .addsticker-bot .notes {
-        margin-top: 6rem;
+        width: 50%;
+        margin-top: 1.5rem;
         border: 1px solid #000;
         height: auto;
         max-height: 380px;
-        padding: 0 .5rem;
+        padding: .5rem 1.5rem;
     }
 
     .addsticker-bot .notes p {
-        font-size: 30px;
+        font-size: 16px;
+        font-weight: 400;
     }
 
     @page {
-        /* size: 10cm 15cm; */
+        size: 10cm 15cm;
         margin: auto;
     }
 }
