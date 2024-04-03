@@ -5,9 +5,9 @@
 }
 
 .container {
-    width: 1024px;
+    width: 1424px;
     padding: .5rem;
-    margin: 0 auto;
+    margin: 0 6rem;
 }
 .print {
     position: absolute;
@@ -22,12 +22,12 @@
     object-fit: cover;
 }
 .addsticker {
-    width: 450px;
-    /* height: 650px; */
+    width: 550px;
+    height: 650px;
     border: 2px solid #333;
     padding: 1rem;
     position: relative;
-    margin: 0 auto;
+    margin: 0;
 }
 
 p {
@@ -76,6 +76,7 @@ p {
 }
 
 @media print {
+
     body * {
         visibility: hidden;
     }
@@ -90,61 +91,71 @@ p {
         padding: 0;
         box-sizing: border-box;
     }
-
-    .addsticker {
-        width: 1100px;
-        border: none;
+    .container {
+        padding: .5rem;
+        margin: 0;
     }
 
+    .print {
+        display: none;
+    }
+    .print img {
+        width: 100%;
+        background-position: center;
+        object-fit: cover;
+    }
+    .addsticker {
+        width: 550px;
+        height: 830px;
+        border: 2px solid #333;
+        padding: 1rem;
+        position: relative;
+        margin: 0;
+    }
+    
     p {
         margin: 0;
-        font-size: 20px;
+        font-size: 22px;
         font-weight: 300;
     }
-
+    
     .addsticker-top,
     .addsticker-mid {
         margin-bottom: 1.5rem;
     }
-
+    
     .logostick {
         width: 150px;
         margin-bottom: 1rem;
     }
-    .logoicstk img {
+    
+    .logostick img {
         width: 100%;
-        object-fit: cover; 
     }
-
+    
     .barcodebot {
         width: 100%;
-        height: 40px;
+        height: 20px;
     }
-
+    
     .barcodebot img {
-        width: 50%;
+        width: 100%;
         max-height: 40px;
         height: auto;
         background-position: center;
         object-fit: cover;
+    
     }
-
-    .addsticker-bot {
-        margin-top: 2rem;
-    }
-
+    
     .addsticker-bot .notes {
-        width: 50%;
-        margin-top: 1.5rem;
+        margin-top: 2rem;
         border: 1px solid #000;
-        height: auto;
-        max-height: 380px;
-        padding: .5rem 1.5rem;
+        height: 190px;
+        padding: 0 .5rem;
     }
-
+    
     .addsticker-bot .notes p {
-        font-size: 16px;
-        font-weight: 400;
+        font-size: 15px;
     }
 
     @page {
