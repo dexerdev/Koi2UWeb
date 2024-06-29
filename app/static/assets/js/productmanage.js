@@ -85,6 +85,7 @@ function createProduct() {
     var productQty = document.getElementById("productQty").value;
     var productUnit = document.getElementById("productUnit").value;
     var feeDelivery = document.getElementById("feeDelivery").value;
+    var urlExternal = document.getElementById("urlExternal").value;
     var isNumeric = !isNaN(parseFloat(productPrice)) && isFinite(productPrice);
 
     if (productName === "") {
@@ -151,6 +152,7 @@ function createProduct() {
     formData.append("qty", productQty);
     formData.append("unit", productUnit);
     formData.append("feeDelivery", feeDelivery);
+    formData.append("urlExternal", urlExternal);
     var requestOptions = {
         method: 'POST',
         body: formData,
@@ -344,6 +346,7 @@ function getProduct(productId) {
     var url = '/api/getProduct?productId=' + productId;
     fetch(url).then(response => response.json()).then((json) => {
         if (json.success) {
+            debugger;
             document.getElementById("editCategory").value = json.data.categoryId;
             document.getElementById("editProductName").value = json.data.productName;
             document.getElementById("editProductPrice").value = json.data.price;
@@ -351,6 +354,7 @@ function getProduct(productId) {
             document.getElementById("editProductQty").value = json.data.qty;
             document.getElementById("editProductUnit").value = json.data.unit;
             document.getElementById("editFeeDelivery").value = json.data.feeDelivery;
+            document.getElementById("editUrlExternal").value = json.data.urlExternal;
             // document.getElementById("showProductImage").src = 'data:image/png;base64,' + json.data.imageBase64;
             loadEditImages(json.data.images);
             document.getElementById("btnEditProduct").setAttribute('onclick', 'editProduct(' + productId + ')');
@@ -496,6 +500,7 @@ function editProduct(productId) {
     var productQty = document.getElementById("editProductQty").value;
     var productUnit = document.getElementById("editProductUnit").value;
     var feeDelivery = document.getElementById("editFeeDelivery").value
+    var urlExternal = document.getElementById("editUrlExternal").value;
     var formDataEdit = new FormData();
     var editImages = [];
     for (var i = 0; i < imgArrayEdit.length; i++) {
@@ -507,7 +512,6 @@ function editProduct(productId) {
             console.log("Other:", imgArrayEdit[i]);
         }
     }
-    debugger;
     formDataEdit.append("editImages", JSON.stringify(editImages));
     formDataEdit.append("productName", productName);
     formDataEdit.append("productDetail", productDetail);
@@ -518,6 +522,7 @@ function editProduct(productId) {
     formDataEdit.append("unit", productUnit);
     formDataEdit.append("productId", productId);
     formDataEdit.append("feeDelivery", feeDelivery);
+    formDataEdit.append("urlExternal",urlExternal);
     var requestOptions = {
         method: 'PUT',
         body: formDataEdit,

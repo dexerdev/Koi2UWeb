@@ -24,9 +24,9 @@ function getPromotionId(promoId) {
             imgWraps.forEach(imgWrap => {
                 imgWrap.innerHTML = '';
             });
-            if (json.data.thumbnail != null) {
+            if (json.data.imageBase64 != null) {
                 imgIconArrayEdit.push({"promoId": json.data.promoId});
-                var html = "<div class='upload_edit_img-box_icon'><div style='background-image: url(data:image/png;base64," + json.data.thumbnail + ")' onclick='editIconClose(" + json.data.promoId + ")' data-number='" + $(".upload_edit_img-close_icon").length + "' data-file='oldicon-" + promoId + "' class='img-bg'><div class='upload_edit_img-close_icon'></div></div></div>";
+                var html = "<div class='upload_edit_img-box_icon'><div style='background-image: url(" + json.data.imageBase64 + ")' onclick='editIconClose(" + json.data.promoId + ")' data-number='" + $(".upload_edit_img-close_icon").length + "' data-file='oldicon-" + promoId + "' class='img-bg'><div class='upload_edit_img-close_icon'></div></div></div>";
                 imgWraps.forEach(imgWrap => {
                     imgWrap.innerHTML += html;
                 });
@@ -375,12 +375,11 @@ function EditIconUpload() {
     var stopFlag = false;
     document.getElementById('upload_edit_inputfile_icon').value = "";
     $('.upload_edit_inputfile_icon').each(function () {
+        debugger;
         if (stopFlag) {
             return false;
         }
         else {
-            // console.log($(this));
-            debugger;
             $(this).on('change', function (e) {
                 editImgWrap = $(this).closest('.upload_edit_box_icon').find('.upload_edit_img-wrap_icon');
                 var maxLength = $(this).attr('data-max_length_icon');

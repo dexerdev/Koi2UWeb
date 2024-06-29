@@ -224,7 +224,7 @@ def createProduct():
                 'createDate': productData['createDate'],
                 'createBy': createBy,
                 'qty': productData['qty'],
-                'unit': productData['unit']}
+                'unit': productData['unit'],'urlExternal': productData['urlExternal']}
         files = []
         for file in request.files.getlist('productImages'):
             files.append(('productImages', (file.filename, file.read(), file.content_type)))
@@ -275,7 +275,8 @@ def editProduct():
                 'editImages': productData['editImages'],
                 'qty': productData['qty'],
                 'unit': productData['unit'],
-                'feeDelivery': productData['feeDelivery']}
+                'feeDelivery': productData['feeDelivery'],
+                'urlExternal': productData['urlExternal']}
         files = []
         for file in request.files.getlist('productImages'):
             files.append(('productImages', (file.filename, file.read(), file.content_type)))
