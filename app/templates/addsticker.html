@@ -64,7 +64,7 @@
                         alt="barcode">
                 </div>
                 <div class="notes">
-                    <p style="text-decoration-line: underline; font-weight: 500;"><strong>หมายเหตุ:</strong></p>
+                    <p class="headnote"><strong>หมายเหตุ:</strong></p>
                     {% for payDet in invoiceDet.paymentDetail %}
                     {% if loop.index <= 6 %} <p>{{ payDet.qty }} <strong>X</strong> {{ payDet.productName }}</p>
                         {% endif %}
